@@ -1,0 +1,1 @@
+export { FooterNote } from './ui/FooterNote'; 

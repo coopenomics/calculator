@@ -1,0 +1,41 @@
+/* Общие стили для компонентов */
+.card-content {
+  padding: 1px;
+}
+
+.card-description {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.label-text {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.input-container {
+  margin-bottom: 16px;
+}
+
+/* Ограничение ширины для десктопов */
+@media (min-width: 769px) {
+  .input-number-container, .slider-container {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}
+
+/* Дополнительные отступы */
+.mb-sm {
+  margin-bottom: 8px;
+}
+
+.mb-md {
+  margin-bottom: 16px;
+}
+
+.mt-md {
+  margin-top: 16px;
+} 

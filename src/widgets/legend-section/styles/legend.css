@@ -1,0 +1,28 @@
+.legend-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.legend-role {
+  display: flex;
+  flex-direction: column;
+}
+
+.legend-role-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.legend-description {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.legend-section {
+  text-align: left;
+}
+
+.legend-section p {
+  margin-bottom: 8px;
+} 

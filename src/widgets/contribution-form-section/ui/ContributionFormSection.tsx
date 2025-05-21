@@ -1,0 +1,37 @@
+import { BaseCard, LabelText, DescriptionText, SharedTooltip, DebouncedInputSlider } from '../../../shared';
+import { FC } from 'react';
+
+interface ContributionFormSectionProps {
+  contributionAmount: number;
+  onContributionAmountChange: (value: number) => void;
+}
+
+export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
+  contributionAmount,
+  onContributionAmountChange,
+}) => {
+  return (
+    <BaseCard title="Ваш взнос результатом">
+      <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
+        <LabelText>
+          Взнос результатом
+          <SharedTooltip text="Себестоимость результата труда, который вы вносите в систему. Расчитывается как затраченное время на результат по вашей ставке за час. Взнос результатом направляется в складочный капитал и создаёт премии, которые капитализируются новыми взносами результатов и возвращаются из числа членских взносов за использование системы электронного документооборота платформы." />
+        </LabelText>
+        <DebouncedInputSlider
+          value={contributionAmount}
+          onChange={onContributionAmountChange}
+          min={0}
+          max={10000000}
+          step={10000}
+          formatter={(value: number | string) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+          parser={(value: string | undefined) => value ? Number(value.replace(/\s/g, '')) : 0}
+          addonAfter="₽"
+          tooltipFormatter={(value: number | undefined) => `${value?.toLocaleString('ru-RU')} ₽`}
+        />
+        <DescriptionText>
+          Себестоимость результата труда, который вы вносите в систему как создатель 
+        </DescriptionText>
+      </div>
+    </BaseCard>
+  );
+}; 

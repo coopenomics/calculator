@@ -1,0 +1,101 @@
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.calculator-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 16px !important;
+  box-sizing: border-box;
+}
+
+.ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.ant-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.ant-card-head {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.ant-slider-rail {
+  background-color: #e1e1e1;
+}
+
+.ant-input-number {
+  border-radius: 6px;
+}
+
+.ant-table-small {
+  font-size: 13px;
+}
+
+/* Отзывчивая верстка */
+@media (max-width: 768px) {
+  .calculator-container {
+    padding: 8px !important;
+  }
+}
+
+/* Утилитарные классы */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Классы отступов */
+.mb-md {
+  margin-bottom: 16px;
+}
+
+.mb-sm {
+  margin-bottom: 8px;
+}
+
+.mt-md {
+  margin-top: 16px;
+}
+
+.mt-lg {
+  margin-top: 32px;
+}
+
+.mt-sm {
+  margin-top: 8px;
+}
+
+.p-sm {
+  padding: 8px;
+}
+
+.p-md {
+  padding: 16px;
+}
+
+/* Стили для форм ввода */
+.input-container {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-container .ant-slider {
+  margin: 8px 0 16px;
+}
+
+.input-container .ant-descriptions-item {
+  padding-bottom: 8px;
+} 
