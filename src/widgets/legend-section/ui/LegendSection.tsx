@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Typography, Divider } from 'antd';
+import { Typography, Divider, Row, Col } from 'antd';
 import { BaseCard } from '../../../shared';
 import '../styles/legend.css';
 import { UserOutlined, BulbOutlined, DollarCircleOutlined, TeamOutlined } from '@ant-design/icons';
@@ -12,30 +12,33 @@ export const LegendSection: FC = () => {
       title="Легенда" 
       className="mb-md"
     >
-      <div className="legend-roles">
-        <div className="legend-role">
-          <Text className="legend-role-title"><UserOutlined style={{ fontSize: 24, marginRight: 8 }} />Создатель</Text>
-          <Text>Участник, который создаёт результат, вкладывая своё время.</Text>
-        </div>
-        
-        <div className="legend-role">
-          <Text className="legend-role-title"><BulbOutlined style={{ fontSize: 24, marginRight: 8 }} />Автор</Text>
-          <Text>Участник, который предложил идею проекта результата.</Text>
-        </div>
-        
-        <div className="legend-role">
-          <Text className="legend-role-title"><DollarCircleOutlined style={{ fontSize: 24, marginRight: 8 }} />Инвестор</Text>
-          <Text>Участник, который инвестирует денежные средства в результат.</Text>
-        </div>
-        
-        <div className="legend-role">
-          <Text className="legend-role-title"><TeamOutlined style={{ fontSize: 24, marginRight: 8 }} />Вкладчик</Text>
-          <Text>Любой участник системы, получающий выгоду от капитализации вклада.</Text>
-        </div>
-      </div>
-      
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} lg={6}>
+          <div className="legend-role">
+            <Text className="legend-role-title"><UserOutlined style={{ fontSize: 24, marginRight: 8 }} />Создатель</Text>
+            <Text>Участник, который создаёт результат, вкладывая своё время.</Text>
+          </div>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <div className="legend-role">
+            <Text className="legend-role-title"><BulbOutlined style={{ fontSize: 24, marginRight: 8 }} />Автор</Text>
+            <Text>Участник, который предложил идею проекта результата.</Text>
+          </div>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <div className="legend-role">
+            <Text className="legend-role-title"><DollarCircleOutlined style={{ fontSize: 24, marginRight: 8 }} />Инвестор</Text>
+            <Text>Участник, который инвестирует денежные средства в результат.</Text>
+          </div>
+        </Col>
+        <Col xs={24} sm={12} lg={6}>
+          <div className="legend-role">
+            <Text className="legend-role-title"><TeamOutlined style={{ fontSize: 24, marginRight: 8 }} />Вкладчик</Text>
+            <Text>Любой участник системы, получающий выгоду от капитализации вклада.</Text>
+          </div>
+        </Col>
+      </Row>
       <Divider />
-      
       <div className="legend-description">
         <Text>
           <strong>Как это работает:</strong> в основе модели лежит принцип капитализации результатов интеллектуальной деятельности 

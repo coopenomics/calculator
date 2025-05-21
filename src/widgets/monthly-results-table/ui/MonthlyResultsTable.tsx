@@ -25,7 +25,7 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
   // Колонки для таблицы результатов
   const allColumns = [
     {
-      title: columnTitle('Месяц', 'Номер месяца от начала участия. Месяц 1 - момент вступления, месяц 2 - первый месяц после внесения Вашего вклада'),
+      title: columnTitle('Месяц', 'Номер месяца от начала участия. Месяц 1 - момент вступления, месяц 2 - первый месяц после внесения вашего вклада'),
       dataIndex: 'month',
       key: 'month',
       render: (value: number) => value + 1
@@ -80,7 +80,7 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Предполагаемая стоимость Вашего вклада', 'Общая сумма Вашего вклада на конец месяца, включая первоначальный взнос и накопленную долю в премиях вкладчиков'),
+      title: columnTitle('Предполагаемая стоимость вашего вклада', 'Общая сумма вашего вклада на конец месяца, включая первоначальный взнос и накопленную долю в премиях вкладчиков'),
       dataIndex: 'initialContribution',
       key: 'initialContribution',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
