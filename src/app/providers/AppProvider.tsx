@@ -11,7 +11,7 @@ interface AppProviderProps {
 
 export const AppProvider: FC<AppProviderProps> = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/calculator/">
       <Layout style={{ minHeight: '100vh', background: 'transparent' }}>
         <Content style={{ padding: 0, width: '100%', margin: 0 }}>
           <Row justify="center" gutter={[0, 0]} style={{ margin: 0, width: '100%' }}>
