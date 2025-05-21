@@ -22,7 +22,7 @@ export const LegendSection: FC = () => {
         <Col xs={24} sm={12} lg={6}>
           <div className="legend-role">
             <Text className="legend-role-title"><BulbOutlined style={{ fontSize: 24, marginRight: 8 }} />Автор</Text>
-            <Text>Участник, который предложил идею проекта результата.</Text>
+            <Text>Участник, который предложил проектную идею результата.</Text>
           </div>
         </Col>
         <Col xs={24} sm={12} lg={6}>
@@ -34,7 +34,7 @@ export const LegendSection: FC = () => {
         <Col xs={24} sm={12} lg={6}>
           <div className="legend-role">
             <Text className="legend-role-title"><TeamOutlined style={{ fontSize: 24, marginRight: 8 }} />Вкладчик</Text>
-            <Text>Любой участник системы, получающий выгоду от капитализации вклада.</Text>
+            <Text>Любой участник системы, получающий выгоду от капитализации вкладов в результат.</Text>
           </div>
         </Col>
       </Row>
