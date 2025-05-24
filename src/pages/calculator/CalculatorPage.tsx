@@ -177,7 +177,7 @@ export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
           />
         </Col>
         
-        <Col xs={24} md={12}>
+        <Col xs={24} md={12} className='mb-md'>
           <ProfitabilityResultsSection 
             additionalCapitalization={additionalCapitalization}
             availableRefund={availableRefund}

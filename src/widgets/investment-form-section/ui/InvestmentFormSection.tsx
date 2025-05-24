@@ -18,7 +18,7 @@ export const InvestmentFormSection: FC<InvestmentFormSectionProps> = ({
           onChange={onInvestorAmountChange}
           min={0}
           max={10000000}
-          step={10000}
+          step={100000}
           formatter={(value: number | string) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
           parser={(value: string | undefined) => value ? Number(value.replace(/\s/g, '')) : 0}
           addonAfter="₽"

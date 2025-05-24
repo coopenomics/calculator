@@ -46,7 +46,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#13c2c2" 
                 text={
                   <span>
-                    Доля «Создателя»: <b>{(100).toFixed(1)}%</b>
+                    Стоимость труда «Создателя»: <b>{(100).toFixed(1)}%</b>
                     <SharedTooltip text="Доля «Создателя» — это часть, которую получает «Создатель» «Результата» труда (100% от его стоимости)." />
                   </span>
                 }
@@ -55,7 +55,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#52c41a" 
                 text={
                   <span>
-                    Доля «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_RATIO * 100).toFixed(1)}%</b>
+                    Стоимость труда «Автора» от «Создателя»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_RATIO * 100).toFixed(1)}%</b>
                     <SharedTooltip text="Доля «Автора» — это часть, которую получает «Автор» «Результата» (61.8% от стоимости «Создателя»)." />
                   </span>
                 }

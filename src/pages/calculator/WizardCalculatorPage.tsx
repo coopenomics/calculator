@@ -119,6 +119,10 @@ export const WizardCalculatorPage: FC = () => {
     setCurrentStep(currentStep + 1);
   };
 
+  const prev = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
@@ -148,6 +152,9 @@ export const WizardCalculatorPage: FC = () => {
               onInvestorAmountChange={setInvestorAmount}
             />
             <div style={{ textAlign: 'center', marginTop: 24 }}>
+              <Button size="large" onClick={prev} style={{ marginRight: 16 }}>
+                Назад
+              </Button>
               <Button type="primary" size="large" onClick={next}>
                 Продолжить
               </Button>
@@ -169,6 +176,9 @@ export const WizardCalculatorPage: FC = () => {
               creatorBonus={creatorBonus}
             />
             <div style={{ textAlign: 'center', marginTop: 24 }}>
+              <Button size="large" onClick={prev} style={{ marginRight: 16 }}>
+                Назад
+              </Button>
               <Button type="primary" size="large" onClick={next}>
                 Подробнее
               </Button>
@@ -198,6 +208,9 @@ export const WizardCalculatorPage: FC = () => {
               firstMonthOthersAuthorBonus={firstMonthOthersAuthorBonus}
             />
             <div style={{ textAlign: 'center', marginTop: 24 }}>
+              <Button size="large" onClick={prev} style={{ marginRight: 16 }}>
+                Назад
+              </Button>
               <Button type="primary" size="large" onClick={next}>
                 Еще подробнее
               </Button>
@@ -209,6 +222,9 @@ export const WizardCalculatorPage: FC = () => {
         return (
           <div style={{ marginTop: 24 }}>
             <div style={{ textAlign: 'center', marginBottom: 24 }}>
+              <Button size="large" onClick={prev} style={{ marginRight: 16 }}>
+                Назад
+              </Button>
               <Button type="primary" size="large" onClick={next}>
                 Перейти к полному калькулятору
               </Button>

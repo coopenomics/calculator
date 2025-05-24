@@ -39,23 +39,23 @@ export const LegendSection: FC = () => {
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: '25px' }} justify={"space-around"}>
-        <Col xs={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col xs={24} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Результат»</Text>
             <Text>Полезный объект интеллектуальной собственности - программа, презентация, приложение, метод, ...</Text>
           </div>
         </Col>
         
-        <Col xs={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col xs={24} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Доля»</Text>
             <Text>Право требования возврата взноса из кооператива.</Text>
           </div>
         </Col>
-        <Col xs={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col xs={24} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Благорост»</Text>
-            <Text>Увеличение стоимости доли в «Результате» от последующих вкладов временем «Создателей».</Text>
+            <Text>Увеличение стоимости «Доли» в «Результате» от последующих вкладов временем «Создателей».</Text>
           </div>
         </Col>
       </Row>
