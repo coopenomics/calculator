@@ -22,7 +22,7 @@ export const LegendSection: FC = () => {
         <Col xs={24} sm={12} lg={6}>
           <div className="legend-role">
             <Text className="legend-role-title"><BulbOutlined style={{ fontSize: 24, marginRight: 8 }} />«Автор»</Text>
-            <Text>Участник, который предложил проектную идею результата.</Text>
+            <Text>Участник, который предложил проектную идею для «Результата».</Text>
           </div>
         </Col>
         <Col xs={24} sm={12} lg={6}>
@@ -39,20 +39,26 @@ export const LegendSection: FC = () => {
         </Col>
       </Row>
       <Row gutter={[16, 16]} style={{ marginTop: '25px' }} justify={"space-around"}>
-        <Col xs={24} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col xs={24} lg={6} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Результат»</Text>
             <Text>Полезный объект интеллектуальной собственности - программа, презентация, приложение, метод, ...</Text>
           </div>
         </Col>
         
-        <Col xs={24} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col xs={24} lg={6} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Доля»</Text>
-            <Text>Право требования возврата взноса из кооператива.</Text>
+            <Text>Часть складочного капитала, выраженная в праве требования возврата паевого взноса из кооператива.</Text>
           </div>
         </Col>
-        <Col xs={24} lg={8} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Col xs={24} lg={6} style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="legend-role">
+            <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Премия»</Text>
+            <Text>Дополнительный взнос, который образуется при внесении «Результата» в кооператив.</Text>
+          </div>
+        </Col>
+        <Col xs={24} lg={6} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Благорост»</Text>
             <Text>Увеличение стоимости «Доли» в «Результате» от последующих вкладов временем «Создателей».</Text>
@@ -62,7 +68,7 @@ export const LegendSection: FC = () => {
       <Divider />
       <div className="legend-description">
         <Text>
-          <strong>Как это работает:</strong> Каждый вклад «Создателя» в «Результат» образует премии для «Авторов» и «Вкладчиков», которые справедливо распределяются по золотому сечению, увеличивая стоимость «Доли» и «Результата» в целом. Денежные взносы «Инвесторов» не образуют новых премий и обеспечивают компенсацию стоимости труда «Авторов» и «Создателей».
+          <strong>Как это работает:</strong> Каждый вклад «Создателя» в «Результат» образует дополнительные взносы («Премии») для «Создателей», «Авторов» и «Вкладчиков», которые определяются по золотому сечению, увеличивая «Долю» и «Результат» в целом. Денежные взносы «Инвесторов» не образуют дополнительных взносов (премий) и обеспечивают компенсацию стоимости труда «Авторов» и «Создателей».
         </Text>
       </div>
       <div className="legend-description">

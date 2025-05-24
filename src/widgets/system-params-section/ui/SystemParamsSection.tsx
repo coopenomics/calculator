@@ -64,8 +64,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#1890ff" 
                 text={
                   <span>
-                    Премия «Создателя»: <b>{(CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * 100).toFixed(0)}%</b>
-                    <SharedTooltip text="Премия «Создателя» — дополнительная сумма, начисляемая «Создателю» (100% от его стоимости)." />
+                    «Премия» «Создателя»: <b>{(CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * 100).toFixed(0)}%</b>
+                    <SharedTooltip text="«Премия» «Создателя» — дополнительная сумма, начисляемая «Создателю» (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -73,8 +73,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#722ed1" 
                 text={
                   <span>
-                    Премия «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * 100).toFixed(0)}%</b>
-                    <SharedTooltip text="Премия «Автора» — дополнительная сумма, начисляемая «Автору» (100% от его стоимости)." />
+                    «Премия» «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * 100).toFixed(0)}%</b>
+                    <SharedTooltip text="«Премия» «Автора» — дополнительная сумма, начисляемая «Автору» (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -82,8 +82,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#faad14" 
                 text={
                   <span>
-                    Премия «Вкладчиков»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
-                    <SharedTooltip text="Премия «Вкладчиков» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
+                    «Премия» «Вкладчиков»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
+                    <SharedTooltip text="«Премия» «Вкладчиков» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
                   </span>
                 }
               />
@@ -146,7 +146,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
             </div>
             {/* Ежемесячные взносы результатами других создателей */}
             <div className="p-md" >
-              <LabelText>Ежемесячные взносы «Результатами» других «Создателей»</LabelText>
+              <LabelText>Ежемесячные взносы трудом других «Создателей»</LabelText>
               <DebouncedInputSlider
                 value={monthlyContributions}
                 onChange={onMonthlyContributionsChange}
@@ -160,7 +160,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 sliderStyle={{ marginBottom: 16 }}
               />
               <DescriptionText>
-                Общая сумма взносов «Результатами» других «Создателей», вносимая ими в систему ежемесячно после вашего внесения «Результата». Эти взносы создают премии, которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас.
+                Общая сумма взносов «Результатами» других «Создателей», вносимая ими в систему ежемесячно после вашего внесения «Результата». Эти взносы создают «Премии», которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас.
               </DescriptionText>
             </div>
             {/* Множитель роста взносов результатами */}
@@ -182,7 +182,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
             </div>
             {/* Эффективность капитала */}
             <div className="p-md" >
-              <LabelText>Эффективность капитала</LabelText>
+              <LabelText>Эффективность капитала в месяц</LabelText>
               <DebouncedInputSlider
                 value={membershipFee}
                 onChange={onMembershipFeeChange}
@@ -194,7 +194,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 unitSuffix="%"
               />
               <DescriptionText>
-                Эффективность показывает, сколько членских взносов приходит за электронный документооборот на каждый новый рубль складочного капитала.
+                Эффективность показывает, сколько членских взносов приходит за электронный документооборот на каждый новый рубль складочного капитала в месяц.
               </DescriptionText>
             </div>
             {/* Множитель роста членских взносов */}

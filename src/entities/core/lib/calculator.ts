@@ -63,7 +63,7 @@ export function calculateBenefits({
   // Не вычитаем totalWithdrawed из складочного капитала, так как его покрывает инвестор
   let shareholderCapital = initialCapital + totalGenerated + firstContributorsBonus + investorAmount - totalWithdrawed + initialMonthlyInvestorAmount;
   
-  // Вклад создателя включает остающуюся часть стоимости и премию + взнос инвестора
+  // Вклад создателя включает остающуюся часть стоимости и «Премию» + взнос инвестора
   let initialContribution = (creatorBaseFact - creatorInitialWithdrawal + creatorBonusFact) + investorAmount;
   
   // Начальная доля создателя с учетом возврата части стоимости
@@ -136,7 +136,7 @@ export function calculateBenefits({
     const othersMonthlyBase = othersCreatorBase + othersAuthorBase; // Общая базовая стоимость
     const othersWithdrawalAmount = othersMonthlyBase * (withdrawalRate / 100); // Возврат по рубильнику
     
-    // Рассчитываем премию вкладчиков (руб)
+    // Рассчитываем «Премию» вкладчиков (руб)
     const contributorsBonus = (monthlyGeneration - othersWithdrawalAmount) * CALCULATOR_CONSTANTS.GOLDEN_RATIO;
     
     // Прирост складочного капитала за месяц от созданных ценностей
@@ -155,13 +155,13 @@ export function calculateBenefits({
     // Общий прирост капитала (включая инвестора)
     const totalCapitalGrowth = capitalGrowth + monthlyInvestorAmount;
     
-    // Увеличиваем складочный капитал: новый взнос + премия вкладчиков + инвестор - возврат (руб)
+    // Увеличиваем складочный капитал: новый взнос + «Премия» вкладчиков + инвестор - возврат (руб)
     shareholderCapital += totalCapitalGrowth;
     
     // Пересчитываем долю инвесторов после изменения складочного капитала
     investorsShare = totalInvestorsAmount / shareholderCapital * 100;
     
-    // Увеличиваем вклад создателя на его долю в премии вкладчиков (руб)
+    // Увеличиваем вклад создателя на его долю в «Премии» вкладчиков (руб)
     const creatorBonusShare = contributorsBonus * (creatorShare / 100);
     initialContribution += creatorBonusShare;
     

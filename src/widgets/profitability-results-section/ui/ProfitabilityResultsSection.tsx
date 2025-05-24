@@ -37,7 +37,7 @@ export const ProfitabilityResultsSection: FC<ProfitabilityResultsSectionProps> =
         </Col>
         <Col flex="1 1 50%">
           <Statistic
-            title="Премия «Создателя»"
+            title="«Премия» «Создателя»"
             value={creatorBonus}
             precision={0}
             prefix="+"
@@ -47,7 +47,7 @@ export const ProfitabilityResultsSection: FC<ProfitabilityResultsSectionProps> =
         </Col>
       </Row>
       <DescriptionText>
-        Включает в себя предполагаемую доходность от роста стоимости Вашего взноса и членских взносов кооперативов за использование электронного документооборота платформы, а также, включает в себя единоразовую премию «Создателя» за вклад трудом.
+        Включает в себя: предполагаемую доходность от дополнительных взносов («Премий»), увеличивающих стоимость Вашего права требования; членские взносы кооперативов за использование электронного документооборота платформы; а также единоразовую «Премию» «Создателя» за вклад трудом.
       </DescriptionText>
       <div className="disclaimer" style={{ marginTop: '16px', fontSize: '12px', background: 'rgba(223, 136, 64, 0.68)', padding: '12px', borderRadius: '8px' }}>
         <Text italic>

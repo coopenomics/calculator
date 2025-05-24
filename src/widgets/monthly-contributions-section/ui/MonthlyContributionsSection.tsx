@@ -15,7 +15,7 @@ export const MonthlyContributionsSection: FC<MonthlyContributionsSectionProps> =
       <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
         <LabelText>
           Сумма взносов в месяц
-          <SharedTooltip text="Общая сумма взносов результатами других создателей, вносимая ими в систему ежемесячно после вашего внесения результата. Эти взносы создают премии, которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас." />
+          <SharedTooltip text="Общая сумма взносов результатами других создателей, вносимая ими в систему ежемесячно после вашего внесения результата. Эти взносы создают «Премии», которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас." />
         </LabelText>
         <DebouncedInputSlider
           value={monthlyContributions}
