@@ -37,10 +37,10 @@ interface CalculatorPageProps {
 export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
   // Начальные параметры из таблицы Excel или переданные через props
   const [initialCapital, setInitialCapital] = useState<number>(initialParams?.initialCapital ?? CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL); // Стартовая капитализация (руб)
-  const [contributionAmount, setContributionAmount] = useState<number>(initialParams?.contributionAmount ?? 1000000); // руб (взнос результатом)
+  const [contributionAmount, setContributionAmount] = useState<number>(initialParams?.contributionAmount ?? 0); // руб (взнос результатом)
   const [investorAmount, setInvestorAmount] = useState<number>(initialParams?.investorAmount ?? 0); // руб (взнос деньгами)
   const [monthlyContributions, setMonthlyContributions] = useState<number>(() => {
-    const contributionValue = initialParams?.contributionAmount ?? 1000000;
+    const contributionValue = initialParams?.contributionAmount ?? 0;
     return initialParams?.monthlyContributions ?? (contributionValue < 1000000 ? 1000000 : contributionValue);
   }); // руб (взносы других в месяц - синхронизируется с contributionAmount)
   const [growthMultiplier, setGrowthMultiplier] = useState<number>(initialParams?.growthMultiplier ?? 0); // % (множитель роста ежемесячных взносов)

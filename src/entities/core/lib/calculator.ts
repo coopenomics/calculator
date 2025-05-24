@@ -328,7 +328,7 @@ export function calculateBenefits({
  */
 export function calculateDefaultBenefits(): CalculationResults {
   return calculateBenefits({
-    contributionAmount: 1000000,
+    contributionAmount: 0,
     investorAmount: 0,
     withdrawalRate: 100,
     initialCapital: CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL,

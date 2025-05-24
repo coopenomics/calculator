@@ -19,7 +19,7 @@ export const WizardCalculatorPage: FC = () => {
   
   // Параметры калькулятора
   const [initialCapital] = useState<number>(CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL);
-  const [contributionAmount, setContributionAmount] = useState<number>(1000000);
+  const [contributionAmount, setContributionAmount] = useState<number>(0);
   const [investorAmount, setInvestorAmount] = useState<number>(0);
   const [monthlyContributions, setMonthlyContributions] = useState<number>(1000000);
   const [growthMultiplier] = useState<number>(0);
