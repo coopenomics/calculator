@@ -7,9 +7,12 @@
     // Перенаправление на index.html с сохранением вложенного пути после /calculator/
     var l = window.location;
     var base = '/calculator';
-    var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname;
-    var redirectUrl = l.protocol + '//' + l.host + base + '/index.html' + path + l.search + l.hash;
-    window.location.replace(redirectUrl);
+    // Если уже на index.html — не редиректим!
+    if (!l.pathname.startsWith(base + '/index.html')) {
+      var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname;
+      var redirectUrl = l.protocol + '//' + l.host + base + '/index.html' + path + l.search + l.hash;
+      window.location.replace(redirectUrl);
+    }
   </script>
 </head>
 <body>
