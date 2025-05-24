@@ -29,16 +29,16 @@ export const CalculatorPage: FC = () => {
   const [monthlyContributions, setMonthlyContributions] = useState<number>(1000000); // руб (взносы других в месяц)
   const [growthMultiplier, setGrowthMultiplier] = useState<number>(0); // % (множитель роста ежемесячных взносов)
   const [membershipFee, setMembershipFee] = useState<number>(5); // % (членские взносы в месяц от складочного капитала)
-  const [withdrawalRate, setWithdrawalRate] = useState<number>(100); // % (сколько пайщик забирает из своей себестоимости)
+  const [withdrawalRate, setWithdrawalRate] = useState<number>(100); // % (сколько пайщик забирает из своей стоимости)
   const [membershipFeeGrowthMultiplier, setMembershipFeeGrowthMultiplier] = useState<number>(0); // % (множитель роста членских взносов)
   
   // Результаты расчетов
-  const [creatorBaseValue, setCreatorBaseValue] = useState<number>(0); // Себестоимость создателя
+  const [creatorBaseValue, setCreatorBaseValue] = useState<number>(0); // Стоимость создателя
   const [creatorBonus, setCreatorBonus] = useState<number>(0); // Премия создателя
-  const [authorBaseValue, setAuthorBaseValue] = useState<number>(0); // Себестоимость автора
+  const [authorBaseValue, setAuthorBaseValue] = useState<number>(0); // Стоимость автора
   const [authorBonus, setAuthorBonus] = useState<number>(0); // Премия автора
   const [totalGenerated, setTotalGenerated] = useState<number>(0); // Общая сумма генерации
-  const [totalBaseValue, setTotalBaseValue] = useState<number>(0); // Общая базовая себестоимость
+  const [totalBaseValue, setTotalBaseValue] = useState<number>(0); // Общая базовая стоимость
   const [availableRefund, setAvailableRefund] = useState<number>(0); // Доступно к возврату
   const [avgMonthlyYield, setAvgMonthlyYield] = useState<number>(0); // Средняя месячная доходность
   const [annualYield, setAnnualYield] = useState<number>(0); // Годовая доходность
@@ -121,6 +121,10 @@ export const CalculatorPage: FC = () => {
             onContributionAmountChange={(value) => setContributionAmount(value || 0)}
           />
           
+        </Col>
+        
+        <Col xs={24} md={12} style={{ display: 'flex', flexDirection: 'column' }}>
+          
           <WithdrawalRateSection 
             withdrawalRate={withdrawalRate}
             onWithdrawalRateChange={setWithdrawalRate}
@@ -132,10 +136,17 @@ export const CalculatorPage: FC = () => {
             investorAmount={investorAmount}
             onInvestorAmountChange={(value) => setInvestorAmount(value || 0)}
           />
-          
-          <MonthlyContributionsSection
-            monthlyContributions={monthlyContributions}
-            onMonthlyContributionsChange={(value) => setMonthlyContributions(value || 0)}
+        </Col>
+        
+        <Col xs={24} md={12}>
+          <ProfitabilityResultsSection 
+            additionalCapitalization={additionalCapitalization}
+            availableRefund={availableRefund}
+            membershipFeeYield={membershipFeeYield}
+            capitalGrowthYield={capitalGrowthYield}
+            avgMonthlyYield={avgMonthlyYield}
+            annualYield={annualYield}
+            roi={roi}
           />
         </Col>
       </Row>
@@ -143,7 +154,7 @@ export const CalculatorPage: FC = () => {
       
       
       <Row gutter={[16, 16]}>
-        <Col xs={24} md={12}>
+        <Col xs={24} md={24}>
           <ContributionResultsSection 
             initialCapital={initialCapital}
             creatorBaseValue={creatorBaseValue}
@@ -159,17 +170,6 @@ export const CalculatorPage: FC = () => {
             initialMonthlyInvestorAmount={initialMonthlyInvestorAmount}
           />
         </Col>
-        <Col xs={24} md={12}>
-          <ProfitabilityResultsSection 
-            additionalCapitalization={additionalCapitalization}
-            availableRefund={availableRefund}
-            membershipFeeYield={membershipFeeYield}
-            capitalGrowthYield={capitalGrowthYield}
-            avgMonthlyYield={avgMonthlyYield}
-            annualYield={annualYield}
-            roi={roi}
-          />
-        </Col>
       </Row>
       <MonthlyResultsTable 
         results={calculationResults}
@@ -182,10 +182,12 @@ export const CalculatorPage: FC = () => {
             membershipFee={membershipFee}
             growthMultiplier={growthMultiplier}
             membershipFeeGrowthMultiplier={membershipFeeGrowthMultiplier}
+            monthlyContributions={monthlyContributions}
             onInitialCapitalChange={setInitialCapital}
             onMembershipFeeChange={setMembershipFee}
             onGrowthMultiplierChange={setGrowthMultiplier}
             onMembershipFeeGrowthMultiplierChange={setMembershipFeeGrowthMultiplier}
+            onMonthlyContributionsChange={(value) => setMonthlyContributions(value || 0)}
           />
         </Col>
       </Row>

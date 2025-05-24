@@ -9,7 +9,7 @@ import { CalculationParams, CalculationResults } from '../model/types';
 export function calculateBenefits({
   contributionAmount, // Взнос результатом (руб)
   investorAmount = 0, // Взнос деньгами (руб)
-  withdrawalRate, // Процент возврата себестоимости (%)
+  withdrawalRate, // Процент возврата стоимости (%)
   initialCapital = CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL, // Стартовая капитализация (руб)
   membershipFee = 5, // Эффективность капитала (%)
   monthlyContributions = 1000000, // Взносы других создателей (руб/мес)
@@ -17,20 +17,20 @@ export function calculateBenefits({
   membershipFeeGrowthMultiplier = 0 // Множитель роста членских взносов (%)
 }: CalculationParams): CalculationResults {
   // Базовые расчеты по заданным формулам
-  const creatorBaseFact = contributionAmount; // Себестоимость создателя из прямого взноса
-  const authorBaseFact = CALCULATOR_CONSTANTS.AUTHOR_RATIO * creatorBaseFact; // Себестоимость автора (61.8%)
+  const creatorBaseFact = contributionAmount; // Стоимость создателя из прямого взноса
+  const authorBaseFact = CALCULATOR_CONSTANTS.AUTHOR_RATIO * creatorBaseFact; // Стоимость автора (61.8%)
   
   // Премии
   const creatorBonusFact = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * creatorBaseFact; // Премия создателя (100%)
   const authorBonusFact = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * authorBaseFact; // Премия автора (100%)
   
-  // Суммарная базовая себестоимость (доступна к возврату)
+  // Суммарная базовая стоимость (доступна к возврату)
   const totalBase = creatorBaseFact + authorBaseFact;
   
   // Суммарная генерация от первого взноса
   const totalGenerated = creatorBaseFact + authorBaseFact + creatorBonusFact + authorBonusFact;
 
-  // Расчет возвращаемой части себестоимости согласно рубильнику возврата
+  // Расчет возвращаемой части стоимости согласно рубильнику возврата
   const creatorWithdrawalAmount = creatorBaseFact * (withdrawalRate / 100); // Сумма возврата создателя
   const authorWithdrawalAmount = authorBaseFact * (withdrawalRate / 100); // Сумма возврата автора
   
@@ -50,10 +50,10 @@ export function calculateBenefits({
   // Не вычитаем totalWithdrawed из складочного капитала, так как его покрывает инвестор
   let shareholderCapital = initialCapital + totalGenerated + firstContributorsBonus + investorAmount - totalWithdrawed + initialMonthlyInvestorAmount;
   
-  // Вклад создателя включает остающуюся часть себестоимости и премию + взнос инвестора
+  // Вклад создателя включает остающуюся часть стоимости и премию + взнос инвестора
   let initialContribution = (creatorBaseFact - creatorInitialWithdrawal + creatorBonusFact) + investorAmount;
   
-  // Начальная доля создателя с учетом возврата части себестоимости
+  // Начальная доля создателя с учетом возврата части стоимости
   let creatorShare = initialContribution / shareholderCapital * 100;
   
   // Массив для хранения результатов по месяцам
@@ -97,16 +97,16 @@ export function calculateBenefits({
     // ===== ЧАСТЬ 1: ПРИРОСТ ВКЛАДА И ИЗМЕНЕНИЕ ДОЛИ =====
     
     // Считаем генерацию от нового взноса (руб)
-    const othersCreatorBase = currentMonthlyContributions; // Базовая себестоимость создателя с учетом роста
-    const othersAuthorBase = othersCreatorBase * CALCULATOR_CONSTANTS.AUTHOR_RATIO; // Себестоимость автора (61.8%)
+    const othersCreatorBase = currentMonthlyContributions; // Базовая стоимость создателя с учетом роста
+    const othersAuthorBase = othersCreatorBase * CALCULATOR_CONSTANTS.AUTHOR_RATIO; // Стоимость автора (61.8%)
     const othersCreatorBonus = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * othersCreatorBase; // Премия создателя (100%)
     const othersAuthorBonus = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * othersAuthorBase; // Премия автора (100%)
     
     // Генерация нового взноса (руб)
     const monthlyGeneration = othersCreatorBase + othersAuthorBase + othersCreatorBonus + othersAuthorBonus;
     
-    // Расчет возврата себестоимости для новых взносов (руб)
-    const othersMonthlyBase = othersCreatorBase + othersAuthorBase; // Общая базовая себестоимость
+    // Расчет возврата стоимости для новых взносов (руб)
+    const othersMonthlyBase = othersCreatorBase + othersAuthorBase; // Общая базовая стоимость
     const othersWithdrawalAmount = othersMonthlyBase * (withdrawalRate / 100); // Возврат по рубильнику
     
     // Рассчитываем премию вкладчиков (руб)
@@ -118,7 +118,7 @@ export function calculateBenefits({
     // Учитываем дополнительного инвестора начиная со второго месяца (month >= 2)
     let monthlyInvestorAmount = 0;
     
-    // Инвестор вносит сумму, равную себестоимости труда авторов и создателей
+    // Инвестор вносит сумму, равную стоимости труда авторов и создателей
     monthlyInvestorAmount = othersCreatorBase + othersAuthorBase
     
     // Увеличиваем накопительную сумму вкладов инвесторов

@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 interface ContributionFormSectionProps {
   contributionAmount: number;
-  onContributionAmountChange: (value: number) => void;
+  onContributionAmountChange: (value: number | undefined) => void;
 }
 
 export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
@@ -11,11 +11,11 @@ export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
   onContributionAmountChange,
 }) => {
   return (
-    <BaseCard title="Ваш взнос результатом">
+    <BaseCard title="Ваш вклад трудом">
       <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
         <LabelText>
-          Взнос результатом
-          <SharedTooltip text="Себестоимость результата труда, который вы вносите в систему. Расчитывается как затраченное время на результат по вашей ставке за час. Взнос результатом направляется в складочный капитал и создаёт премии, которые капитализируются новыми взносами результатов и возвращаются из числа членских взносов за использование системы электронного документооборота платформы." />
+          Укажите стоимость труда
+          <SharedTooltip text="Стоимость «результата» труда, который вы вносите в систему. Расчитывается как затраченное время на «результат» по вашей ставке за час. Взнос «результатом» направляется в складочный капитал и создаёт премии, которые капитализируются новыми взносами «результатов» и возвращаются из числа членских взносов за использование системы электронного документооборота платформы." />
         </LabelText>
         <DebouncedInputSlider
           value={contributionAmount}
@@ -29,7 +29,7 @@ export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
           tooltipFormatter={(value: number | undefined) => `${value?.toLocaleString('ru-RU')} ₽`}
         />
         <DescriptionText>
-          Себестоимость результата труда, который вы вносите в систему как создатель 
+          Стоимость труда, который Вы вносите в «результат» как «создатель»
         </DescriptionText>
       </div>
     </BaseCard>

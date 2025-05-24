@@ -45,14 +45,13 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
 
   // Метки для графика
   const pieLabels = [
-    'Себестоимость вашего результата',
-    'Ваш взнос деньгами',
-    'Себестоимость труда авторов результата',
-    'Ваша премия как создателя',
-    'Премия авторов',
-    'Премия вкладчиков',
-    'Вклад других инвесторов',
-    
+    'Ваш взнос «создателя»',
+    'Ваш взнос «инвестора»',
+    'Взнос «автора»',
+    'Ваша премия «создателя»',
+    'Премия «автора»',
+    'Премия «вкладчиков»',
+    'Вклад других «инвесторов»',
   ];
 
   // Цвета для графика
@@ -125,7 +124,59 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
   return (
     <BaseCard title="Вклады и премии в первый месяц">
       <Row gutter={[16, 16]}>
-        <Col xs={24} lg={24}>
+        <Col xs={24} lg={12} className='mt-md'>
+          <div className="result-item">
+            <Text>
+              Ваш взнос «создателя»:
+              <SharedTooltip text="Стоимость вашего «результата» труда, который вы внесли в систему. Это то, за что вы можете получить возврат, в зависимости от процента возврата стоимости." />
+            </Text>
+            <Text strong>{creatorBaseValue.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Ваш взнос «инвестора»:
+              <SharedTooltip text="Сумма денежных средств, которые вы внесли как «инвестор». Этот взнос не создаёт премий, но увеличивает вашу долю в складочном капитале." />
+            </Text>
+            <Text strong>{investorAmount.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          
+          <div className="result-item">
+            <Text>
+              Ваша премия «создателя»:
+              <SharedTooltip text="Дополнительная сумма, которую система начисляет Вам как «создателю» «результата» (100% от стоимости вашего «результата» за вычетом выплаченной компенсации стоимости труда). Премия всегда капитализируется и увеличивает вашу долю в складочном капитале." />
+            </Text>
+            <Text strong>{creatorBonus.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Взнос «автора»:
+              <SharedTooltip text="Стоимость труда «автора», который внёс вклад в создание вашего «результата» (61.8% от стоимости вашего «результата»). «Авторы» также могут получить компенсацию стоимости труда при внесении «результата»." />
+            </Text>
+            <Text strong>{authorBaseValue.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Премия «автора»:
+              <SharedTooltip text="Дополнительная сумма, начисляемая «авторам» (100% от стоимости их труда в «результате»). Как и все премии, она капитализируется в складочном капитале." />
+            </Text>
+            <Text strong>{authorBonus.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Премия «вкладчиков»:
+              <SharedTooltip text="Дополнительная капитализация для ранних «вкладчиков» («авторов», «создателей» и «инвесторов»), рассчитанная по коэффициенту золотого сечения (161.8% от суммы стоимости и премий «авторов» и «создателей» за вычетом их возвратов). Эта премия увеличивает общий складочный капитал и распределяется между всеми участниками согласно доле." />
+            </Text>
+            <Text strong>{additionalCapitalization.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Вклад других «инвесторов»:
+              <SharedTooltip text="Суммарный вклад других «инвесторов» в первом месяце, т.е. не Ваш. Этот вклад влияет на общий складочный капитал и обеспечивает возврат стоимости вкладов «авторов» и «создателей»." />
+            </Text>
+            <Text strong>{initialMonthlyInvestorAmount.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+        </Col>
+        <Col xs={24} lg={12}>
           {isClient && chartData.length > 0 && (
             <ReactApexChart 
               key={`chart-${JSON.stringify(chartData)}`}
@@ -135,58 +186,6 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
               height={350} 
             />
           )}
-        </Col>
-        <Col xs={24} lg={24} className='mt-lg'>
-          <div className="result-item">
-            <Text>
-              Себестоимость вашего результата:
-              <SharedTooltip text="Стоимость вашего результата труда, который вы внесли в систему. Это то, за что вы можете получить возврат, в зависимости от процента возврата себестоимости." />
-            </Text>
-            <Text strong>{creatorBaseValue.toLocaleString('ru-RU')} ₽</Text>
-          </div>
-          <div className="result-item">
-            <Text>
-              Ваш взнос деньгами в результат:
-              <SharedTooltip text="Сумма денежных средств, которые вы внесли как инвестор. Этот взнос не создаёт премий, но увеличивает вашу долю в складочном капитале." />
-            </Text>
-            <Text strong>{investorAmount.toLocaleString('ru-RU')} ₽</Text>
-          </div>
-          
-          <div className="result-item">
-            <Text>
-              Ваша премия как создателя в результате:
-              <SharedTooltip text="Дополнительная сумма, которую система начисляет Вам как создателю результата (100% от себестоимости вашего результата). Премия всегда капитализируется и увеличивает вашу долю в складочном капитале." />
-            </Text>
-            <Text strong>{creatorBonus.toLocaleString('ru-RU')} ₽</Text>
-          </div>
-          <div className="result-item">
-            <Text>
-              Себестоимость труда авторов в результате:
-              <SharedTooltip text="Себестоимость труда автора или соавторов, которые внесли вклад в создание вашего результата (61.8% от себестоимости вашего результата). Авторы также могут получить возврат части своей себестоимости труда при внесении Вами результата." />
-            </Text>
-            <Text strong>{authorBaseValue.toLocaleString('ru-RU')} ₽</Text>
-          </div>
-          <div className="result-item">
-            <Text>
-              Премия авторов в результате:
-              <SharedTooltip text="Дополнительная сумма, начисляемая авторам (100% от себестоимости их труда в результате). Как и все премии, она капитализируется в складочном капитале." />
-            </Text>
-            <Text strong>{authorBonus.toLocaleString('ru-RU')} ₽</Text>
-          </div>
-          <div className="result-item">
-            <Text>
-              Премия вкладчиков в результате:
-              <SharedTooltip text="Дополнительная капитализация для ранних вкладчиков (авторов, создателей и инвесторов), рассчитанная по коэффициенту золотого сечения (161.8% от суммы себестоимости и премий авторой и создателей за вычетом их возвратов). Эта премия увеличивает общий складочный капитал и распределяется между всеми участниками согласно доле." />
-            </Text>
-            <Text strong>{additionalCapitalization.toLocaleString('ru-RU')} ₽</Text>
-          </div>
-          <div className="result-item">
-            <Text>
-              Вклад инвесторов в результате:
-              <SharedTooltip text="Суммарный вклад других инвесторов в первом месяце. Этот вклад влияет на общий складочный капитал и обеспечивает возврат себестоимости вкладов авторов и создателей." />
-            </Text>
-            <Text strong>{initialMonthlyInvestorAmount.toLocaleString('ru-RU')} ₽</Text>
-          </div>
         </Col>
       </Row>
     </BaseCard>
