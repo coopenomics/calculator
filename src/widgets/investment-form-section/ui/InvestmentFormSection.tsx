@@ -11,12 +11,8 @@ export const InvestmentFormSection: FC<InvestmentFormSectionProps> = ({
   onInvestorAmountChange,
 }) => {
   return (
-    <BaseCard title="Ваш взнос деньгами">
+    <BaseCard title="Ваш вклад деньгами">
       <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
-        <LabelText>
-          Укажите сумму взноса деньгами
-          <SharedTooltip text="Сумма денежных средств, которые вы вносите в «результат» как «инвестор». Взнос деньгами не создаёт премий, но увеличивает вашу долю в складочном капитале и позволяет получать выгоду от роста капитала и членских взносов." />
-        </LabelText>
         <DebouncedInputSlider
           value={investorAmount}
           onChange={onInvestorAmountChange}
@@ -29,7 +25,7 @@ export const InvestmentFormSection: FC<InvestmentFormSectionProps> = ({
           tooltipFormatter={(value: number | undefined) => `${value?.toLocaleString('ru-RU')} ₽`}
         />
         <DescriptionText>
-          Сумма денежных средств, которые вы вносите в «результат» как «инвестор»
+          Сумма денежных средств, которые вы вносите в «Результат» как «Инвестор». Взнос деньгами увеличивает вашу долю в складочном капитале и позволяет авторам и создателям получать выплаты по стоимости их труда. 
         </DescriptionText>
       </div>
     </BaseCard>

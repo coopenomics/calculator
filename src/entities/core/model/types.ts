@@ -32,6 +32,13 @@ export interface MonthlyResult {
   monthlyInvestorAmount?: number; // Ежемесячный вклад инвестора
   totalInvestorsAmount?: number; // Накопительный итог вкладов инвесторов
   investorsShare?: number; // Доля инвесторов в процентах
+  
+  // Данные о других создателях по месяцам
+  othersCreatorBase?: number; // Базовая стоимость других создателей
+  othersAuthorBase?: number; // Стоимость авторов других создателей
+  othersCreatorBonus?: number; // Премия других создателей
+  othersAuthorBonus?: number; // Премия авторов других создателей
+  othersWithdrawalAmount?: number; // Возврат другим создателям
 }
 
 /**
@@ -45,6 +52,12 @@ export interface CalculationResults {
   authorBonus: number;
   totalBaseValue: number;
   totalGenerated: number;
+  
+  // Данные о других создателях в первом месяце
+  firstMonthOthersCreatorBase: number;
+  firstMonthOthersAuthorBase: number;
+  firstMonthOthersCreatorBonus: number;
+  firstMonthOthersAuthorBonus: number;
   
   // Доходность и капитализация
   additionalCapitalization: number;
@@ -88,4 +101,11 @@ export interface ColumnVisibility {
   monthlyInvestorAmount?: boolean; // Ежемесячный вклад инвестора
   totalInvestorsAmount?: boolean; // Накопительный итог вкладов инвесторов
   investorsShare?: boolean; // Доля инвесторов в процентах
+  
+  // Колонки для других создателей
+  othersCreatorBase?: boolean; // Базовая стоимость других создателей
+  othersAuthorBase?: boolean; // Стоимость авторов других создателей
+  othersCreatorBonus?: boolean; // Премия других создателей
+  othersAuthorBonus?: boolean; // Премия авторов других создателей
+  othersWithdrawalAmount?: boolean; // Возврат другим создателям
 } 

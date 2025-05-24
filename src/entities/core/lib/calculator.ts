@@ -16,34 +16,47 @@ export function calculateBenefits({
   growthMultiplier = 0, // Множитель роста взносов (%)
   membershipFeeGrowthMultiplier = 0 // Множитель роста членских взносов (%)
 }: CalculationParams): CalculationResults {
-  // Базовые расчеты по заданным формулам
+  // Проверяем, является ли пользователь только инвестором (не вносит труд)
+  const isUserInvestorOnly = contributionAmount === 0;
+  
+  // Базовые расчеты по заданным формулам (для UI и возврата пользователю)
   const creatorBaseFact = contributionAmount; // Стоимость создателя из прямого взноса
   const authorBaseFact = CALCULATOR_CONSTANTS.AUTHOR_RATIO * creatorBaseFact; // Стоимость автора (61.8%)
   
-  // Премии
+  // Премии пользователя
   const creatorBonusFact = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * creatorBaseFact; // Премия создателя (100%)
   const authorBonusFact = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * authorBaseFact; // Премия автора (100%)
   
-  // Суммарная базовая стоимость (доступна к возврату)
+  // Если пользователь только инвестор, учитываем взносы других создателей в первом месяце
+  const firstMonthOthersCreatorBase = isUserInvestorOnly ? monthlyContributions : 0;
+  const firstMonthOthersAuthorBase = isUserInvestorOnly ? CALCULATOR_CONSTANTS.AUTHOR_RATIO * firstMonthOthersCreatorBase : 0;
+  const firstMonthOthersCreatorBonus = isUserInvestorOnly ? CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * firstMonthOthersCreatorBase : 0;
+  const firstMonthOthersAuthorBonus = isUserInvestorOnly ? CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * firstMonthOthersAuthorBase : 0;
+  
+  // Суммарная базовая стоимость (доступна к возврату только для пользователя)
   const totalBase = creatorBaseFact + authorBaseFact;
   
-  // Суммарная генерация от первого взноса
-  const totalGenerated = creatorBaseFact + authorBaseFact + creatorBonusFact + authorBonusFact;
+  // Суммарная генерация от первого взноса (включая других создателей если пользователь только инвестор)
+  const totalGenerated = creatorBaseFact + authorBaseFact + creatorBonusFact + authorBonusFact +
+                         firstMonthOthersCreatorBase + firstMonthOthersAuthorBase + firstMonthOthersCreatorBonus + firstMonthOthersAuthorBonus;
 
-  // Расчет возвращаемой части стоимости согласно рубильнику возврата
+  // Расчет возвращаемой части стоимости согласно рубильнику возврата (только для пользователя)
   const creatorWithdrawalAmount = creatorBaseFact * (withdrawalRate / 100); // Сумма возврата создателя
   const authorWithdrawalAmount = authorBaseFact * (withdrawalRate / 100); // Сумма возврата автора
+  
+  // Расчет возврата для других создателей в первом месяце (если пользователь только инвестор)
+  const firstMonthOthersWithdrawal = (firstMonthOthersCreatorBase + firstMonthOthersAuthorBase) * (withdrawalRate / 100);
   
   const creatorInitialWithdrawal = creatorWithdrawalAmount; // Начальный возврат создателя
   const authorInitialWithdrawal = authorWithdrawalAmount; // Начальный возврат автора
   
-  const totalWithdrawed = creatorInitialWithdrawal + authorInitialWithdrawal;
+  const totalWithdrawed = creatorInitialWithdrawal + authorInitialWithdrawal + firstMonthOthersWithdrawal;
   
   // Расчет дополнительной капитализации от генерации
   const firstContributorsBonus = (totalGenerated - totalWithdrawed) * CALCULATOR_CONSTANTS.GOLDEN_RATIO;
   
-  // Учитываем инвестора в нулевой месяц (аналогично логике для остальных месяцев)
-  const initialMonthlyInvestorAmount = creatorBaseFact + authorBaseFact;
+  // Учитываем инвестора в нулевой месяц (компенсирует возврат как пользователю, так и другим создателям)
+  const initialMonthlyInvestorAmount = creatorBaseFact + authorBaseFact + firstMonthOthersCreatorBase + firstMonthOthersAuthorBase;
   
   // В первый месяц считаем складочный капитал
   // Добавляем взнос инвестора к складочному капиталу
@@ -83,13 +96,27 @@ export function calculateBenefits({
     creatorMembershipFeePayment: Math.round(creatorInitialWithdrawal), // Возврат создателю в нулевой месяц
     accumulatedFees: 0,
     isPayoutMonth: false, // Флаг для различения от обычных выплат членских взносов
-    currentMonthlyContributions: Math.round(initialMonthlyInvestorAmount), // В нулевом месяце учитываем вклад инвестора
+    // Если пользователь только инвестор, показываем взносы других создателей + инвестора
+    // Иначе показываем только инвестора (как раньше)
+    currentMonthlyContributions: Math.round(isUserInvestorOnly ? 
+      (firstMonthOthersCreatorBase + firstMonthOthersAuthorBase + initialMonthlyInvestorAmount) :
+      initialMonthlyInvestorAmount
+    ),
     monthlyInvestorAmount: Math.round(initialMonthlyInvestorAmount), // Добавляем информацию о ежемесячном инвесторе
     totalInvestorsAmount: Math.round(totalInvestorsAmount), // Накопительный итог вкладов инвесторов
-    investorsShare: parseFloat(investorsShare.toFixed(2)) // Доля инвесторов
+    investorsShare: parseFloat(investorsShare.toFixed(2)), // Доля инвесторов
+    
+    // Данные о других создателях в нулевом месяце
+    othersCreatorBase: Math.round(firstMonthOthersCreatorBase),
+    othersAuthorBase: Math.round(firstMonthOthersAuthorBase),
+    othersCreatorBonus: Math.round(firstMonthOthersCreatorBonus),
+    othersAuthorBonus: Math.round(firstMonthOthersAuthorBonus),
+    othersWithdrawalAmount: Math.round(firstMonthOthersWithdrawal)
   });
   
   // Текущее значение взносов других создателей (без учета инвесторов)
+  // Если пользователь только инвестор, то взносы других уже учтены в нулевом месяце,
+  // поэтому в первом месяце применяем рост к базовому значению
   let currentMonthlyContributions = monthlyContributions;
   
   // Расчет по месяцам (от 1 до 36 месяцев = 3 года)
@@ -215,7 +242,14 @@ export function calculateBenefits({
       currentMonthlyContributions: Math.round(currentMonthlyContributions + monthlyInvestorAmount),
       monthlyInvestorAmount: Math.round(monthlyInvestorAmount),
       totalInvestorsAmount: Math.round(totalInvestorsAmount),
-      investorsShare: parseFloat(investorsShare.toFixed(2))
+      investorsShare: parseFloat(investorsShare.toFixed(2)),
+      
+      // Данные о других создателях в текущем месяце
+      othersCreatorBase: Math.round(othersCreatorBase),
+      othersAuthorBase: Math.round(othersAuthorBase),
+      othersCreatorBonus: Math.round(othersCreatorBonus),
+      othersAuthorBonus: Math.round(othersAuthorBonus),
+      othersWithdrawalAmount: Math.round(othersWithdrawalAmount)
     });
   }
   
@@ -256,6 +290,12 @@ export function calculateBenefits({
     authorBonus: authorBonusFact,
     totalBaseValue: totalBase,
     totalGenerated,
+    
+    // Данные о других создателях в первом месяце
+    firstMonthOthersCreatorBase: Math.round(firstMonthOthersCreatorBase),
+    firstMonthOthersAuthorBase: Math.round(firstMonthOthersAuthorBase),
+    firstMonthOthersCreatorBonus: Math.round(firstMonthOthersCreatorBonus),
+    firstMonthOthersAuthorBonus: Math.round(firstMonthOthersAuthorBonus),
     
     // Доходность и капитализация
     additionalCapitalization: Math.round(firstContributorsBonus),

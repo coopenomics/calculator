@@ -46,8 +46,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#13c2c2" 
                 text={
                   <span>
-                    Доля «создателя»: <b>{(100).toFixed(1)}%</b>
-                    <SharedTooltip text="Доля «создателя» — это часть, которую получает «создатель» «результата» труда (100% от его стоимости)." />
+                    Доля «Создателя»: <b>{(100).toFixed(1)}%</b>
+                    <SharedTooltip text="Доля «Создателя» — это часть, которую получает «Создатель» «Результата» труда (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -55,8 +55,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#52c41a" 
                 text={
                   <span>
-                    Доля «автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_RATIO * 100).toFixed(1)}%</b>
-                    <SharedTooltip text="Доля «автора» — это часть, которую получает «автор» «результата» (61.8% от стоимости «создателя»)." />
+                    Доля «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_RATIO * 100).toFixed(1)}%</b>
+                    <SharedTooltip text="Доля «Автора» — это часть, которую получает «Автор» «Результата» (61.8% от стоимости «Создателя»)." />
                   </span>
                 }
               />
@@ -64,8 +64,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#1890ff" 
                 text={
                   <span>
-                    Премия «создателя»: <b>{(CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * 100).toFixed(0)}%</b>
-                    <SharedTooltip text="Премия «создателя» — дополнительная сумма, начисляемая «создателю» (100% от его стоимости)." />
+                    Премия «Создателя»: <b>{(CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * 100).toFixed(0)}%</b>
+                    <SharedTooltip text="Премия «Создателя» — дополнительная сумма, начисляемая «Создателю» (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -73,8 +73,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#722ed1" 
                 text={
                   <span>
-                    Премия «автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * 100).toFixed(0)}%</b>
-                    <SharedTooltip text="Премия «автора» — дополнительная сумма, начисляемая «автору» (100% от его стоимости)." />
+                    Премия «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * 100).toFixed(0)}%</b>
+                    <SharedTooltip text="Премия «Автора» — дополнительная сумма, начисляемая «Автору» (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -82,8 +82,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#faad14" 
                 text={
                   <span>
-                    Премия «вкладчиков»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
-                    <SharedTooltip text="Премия «вкладчиков» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
+                    Премия «Вкладчиков»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
+                    <SharedTooltip text="Премия «Вкладчиков» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
                   </span>
                 }
               />
@@ -110,14 +110,14 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 text={
                   <span>
                     Обеспечение инвестициями: <b>100%</b>
-                    <SharedTooltip text="Модель предполагает, что каждый месяц в систему инвестируются средства, обеспечивающие возвраты стоимости труда «создателям» и «авторам» в полном объеме." />
+                    <SharedTooltip text="Модель предполагает, что каждый месяц в систему инвестируются средства, обеспечивающие возвраты стоимости труда «Создателям» и «Авторам» в полном объеме." />
                   </span>
                 }
               />
             </Space>
             <div className="disclaimer" style={{ marginTop: '16px', fontSize: '12px', background: 'rgba(223, 136, 64, 0.68)', padding: '12px', borderRadius: '8px' }}>
               <span style={{ fontStyle: 'italic' }}>
-                При снижении уровня инвестиционного обеспечения возвраты стоимости труда «создателям» и «авторам» могут быть отложены до поступления достаточного объёма новых инвестиций.
+                При снижении уровня взносов от инвесторов возвраты стоимости труда «Создателям» и «Авторам» могут быть отложены до поступления достаточного объёма новых инвестиций.
               </span>
             </div>
           </div>
@@ -146,7 +146,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
             </div>
             {/* Ежемесячные взносы результатами других создателей */}
             <div className="p-md" >
-              <LabelText>Ежемесячные взносы «результатами» других «создателей»</LabelText>
+              <LabelText>Ежемесячные взносы «Результатами» других «Создателей»</LabelText>
               <DebouncedInputSlider
                 value={monthlyContributions}
                 onChange={onMonthlyContributionsChange}
@@ -160,12 +160,12 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 sliderStyle={{ marginBottom: 16 }}
               />
               <DescriptionText>
-                Общая сумма взносов «результатами» других «создателей», вносимая ими в систему ежемесячно после вашего внесения «результата». Эти взносы создают премии, которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас.
+                Общая сумма взносов «Результатами» других «Создателей», вносимая ими в систему ежемесячно после вашего внесения «Результата». Эти взносы создают премии, которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас.
               </DescriptionText>
             </div>
             {/* Множитель роста взносов результатами */}
             <div className="p-md" >
-              <LabelText>Множитель роста взносов «результатами»</LabelText>
+              <LabelText>Множитель роста взносов «Результатами»</LabelText>
               <DebouncedInputSlider
                 value={growthMultiplier}
                 onChange={onGrowthMultiplierChange}
@@ -177,7 +177,7 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 unitSuffix="%"
               />
               <DescriptionText>
-                Определяет динамику роста «результатов» - насколько увеличиваются взносы «результатов» других «создателей» каждый месяц
+                Определяет динамику роста «Результатов» - насколько увеличиваются взносы «Результатов» других «Создателей» каждый месяц
               </DescriptionText>
             </div>
             {/* Эффективность капитала */}

@@ -44,39 +44,70 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
     },
     
     {
-      title: columnTitle('Сумма генерации', 'Общая сумма стоимости взносов «результатов» труда «создателей» и «авторов», а также их премий (без учёта премий «вкладчиков» и взносов «инвесторов») за месяц'),
+      title: columnTitle('Сумма генерации', 'Общая сумма стоимости взносов «Результатов» труда «Создателей» и «Авторов», а также их премий (без учёта премий «Вкладчиков» и взносов «Инвесторов») за месяц'),
       dataIndex: 'monthlyGeneration',
       key: 'monthlyGeneration',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Премия «вкладчиков»', 'Дополнительная капитализация от новых взносов «результатами» труда «создателей» и «авторов» (161.8% от суммы стоимости труда и их премий за вычетом возвратов)'),
+      title: columnTitle('Премия «Вкладчиков»', 'Дополнительная капитализация от новых взносов «Результатами» труда «Создателей» и «Авторов» (161.8% от суммы стоимости труда и их премий за вычетом возвратов)'),
       dataIndex: 'contributorsBonus',
       key: 'contributorsBonus',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Вклад других «инвесторов»', 'Денежный взнос других «инвесторов» в текущем месяце'),
+      title: columnTitle('Вклад других «Инвесторов»', 'Денежный взнос других «Инвесторов» в текущем месяце'),
       dataIndex: 'monthlyInvestorAmount',
       key: 'monthlyInvestorAmount',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Сумма вкладов «инвесторов»', 'Накопительная сумма всех взносов всех «инвесторов» с начала учета (включая Вас)'),
+      title: columnTitle('Сумма вкладов «Инвесторов»', 'Накопительная сумма всех взносов всех «Инвесторов» с начала учета (включая Вас)'),
       dataIndex: 'totalInvestorsAmount',
       key: 'totalInvestorsAmount',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Доля «инвесторов»', 'Процентная доля всех «инвесторов» в общем складочном капитале системы'),
+      title: columnTitle('Доля «Инвесторов»', 'Процентная доля всех «Инвесторов» в общем складочном капитале системы'),
       dataIndex: 'investorsShare',
       key: 'investorsShare',
       render: (value: number) => value + ' %'
     },
     {
-      title: columnTitle('Вклады других «создателей» и «инвесторов»', 'Общая сумма взносов других «создателей» и «инвесторов» в текущем месяце'),
+      title: columnTitle('Вклады других «Создателей» и «Инвесторов»', 'Общая сумма взносов других «Создателей» и «Инвесторов» в текущем месяце'),
       dataIndex: 'currentMonthlyContributions',
       key: 'currentMonthlyContributions',
+      render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
+    },
+    ,
+    {
+      title: columnTitle('Вклад других «Создателей»', 'Базовая стоимость «Результатов» труда других «Создателей» в текущем месяце'),
+      dataIndex: 'othersCreatorBase',
+      key: 'othersCreatorBase',
+      render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
+    },
+    {
+      title: columnTitle('Вклад «Авторов» других', 'Стоимость труда «Авторов», связанных с «Результатами» других «Создателей» (61.8% от их базовой стоимости)'),
+      dataIndex: 'othersAuthorBase',
+      key: 'othersAuthorBase',
+      render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
+    },
+    {
+      title: columnTitle('Премия других «Создателей»', 'Дополнительная сумма, начисляемая другим «Создателям» (100% от стоимости их «Результатов»)'),
+      dataIndex: 'othersCreatorBonus',
+      key: 'othersCreatorBonus',
+      render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
+    },
+    {
+      title: columnTitle('Премия «Авторов» других', 'Дополнительная сумма, начисляемая «Авторам» других «Создателей» (100% от стоимости их труда)'),
+      dataIndex: 'othersAuthorBonus',
+      key: 'othersAuthorBonus',
+      render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
+    },
+    {
+      title: columnTitle('Возврат другим', 'Сумма возврата стоимости «Результатов» другим «Создателям» и их «Авторам» в текущем месяце'),
+      dataIndex: 'othersWithdrawalAmount',
+      key: 'othersWithdrawalAmount',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
@@ -104,7 +135,7 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Ваши предполагаемые возвраты', 'Сумма, которую вы предположительно получите в текущем месяце (возврат стоимости «результата» в 1 месяце или членские взносы в последующих месяцах выплат)'),
+      title: columnTitle('Ваши предполагаемые возвраты', 'Сумма, которую вы предположительно получите в текущем месяце (возврат стоимости «Результата» в 1 месяце или членские взносы в последующих месяцах выплат)'),
       dataIndex: 'creatorMembershipFeePayment',
       key: 'creatorMembershipFeePayment',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
@@ -115,17 +146,20 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
   const basicColumnKeys = ['month', 'shareholderCapital', 'initialContribution', 'creatorShare', 'creatorMembershipFeePayment'];
 
   // Фильтруем видимые колонки по настройке и по режиму отображения
-  const columns = allColumns.filter(column => {
-    if (!isDetailedView) {
-      // В кратком режиме показываем только основные колонки
-      return basicColumnKeys.includes(column.key) && columnVisibility[column.key as keyof ColumnVisibility];
-    }
-    // В подробном режиме фильтруем по настройкам видимости
-    return columnVisibility[column.key as keyof ColumnVisibility];
-  });
+  const columns = allColumns
+    .filter((column) => {
+      if (!column) return false;
+      if (!isDetailedView) {
+        // В кратком режиме показываем только основные колонки
+        return basicColumnKeys.includes(column.key) && columnVisibility[column.key as keyof ColumnVisibility];
+      }
+      // В подробном режиме фильтруем по настройкам видимости
+      return columnVisibility[column.key as keyof ColumnVisibility];
+    })
+    .filter(Boolean) as Exclude<typeof allColumns[number], undefined>[]; // Явно приводим к массиву колонок без undefined
 
   return (
-    <BaseCard title="Предполагаемые результаты по месяцам" className="mt-lg mb-md">
+    <BaseCard title="Складочный капитал по месяцам" className="mt-lg mb-md">
       <div style={{ marginBottom: 16, textAlign: 'right' }}>
         <span style={{ marginRight: 8 }}>Кратко</span>
         <Switch 
@@ -136,7 +170,7 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       </div>
       <Table 
         dataSource={results} 
-        columns={columns} 
+        columns={columns as any} // Явно приводим к any для Table, чтобы убрать ошибку типов
         pagination={false} 
         rowKey="month" 
         scroll={{ x: 'max-content' }}

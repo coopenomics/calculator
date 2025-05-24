@@ -13,10 +13,10 @@ export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
   return (
     <BaseCard title="Ваш вклад трудом">
       <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
-        <LabelText>
-          Укажите стоимость труда
-          <SharedTooltip text="Стоимость «результата» труда, который вы вносите в систему. Расчитывается как затраченное время на «результат» по вашей ставке за час. Взнос «результатом» направляется в складочный капитал и создаёт премии, которые капитализируются новыми взносами «результатов» и возвращаются из числа членских взносов за использование системы электронного документооборота платформы." />
-        </LabelText>
+        {/* <LabelText> */}
+          {/* Укажите стоимость труда */}
+          {/* <SharedTooltip text="Стоимость труда, который вы вносите в систему. Расчитывается как затраченное время на «Результат» по вашей ставке за час." /> */}
+        {/* </LabelText> */}
         <DebouncedInputSlider
           value={contributionAmount}
           onChange={onContributionAmountChange}
@@ -29,7 +29,7 @@ export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
           tooltipFormatter={(value: number | undefined) => `${value?.toLocaleString('ru-RU')} ₽`}
         />
         <DescriptionText>
-          Стоимость труда, который Вы вносите в «результат» как «создатель»
+          Укажите стоимость труда, который Вы вносите в «Результат» как «Создатель». Взнос увеличивает вашу долю в складочном капитале и создаёт премии, которые капитализируются новыми взносами "трудом" и возвращаются из числа членских взносов кооперативов за использование системы электронного документооборота платформы. Стоимость вклада расчитывается как затраченное время на «Результат» по вашей ставке за час.
         </DescriptionText>
       </div>
     </BaseCard>

@@ -21,16 +21,32 @@ import './styles/calculator.css';
 
 const { Title, Text } = Typography;
 
-export const CalculatorPage: FC = () => {
-  // Начальные параметры из таблицы Excel
-  const [initialCapital, setInitialCapital] = useState<number>(CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL); // Стартовая капитализация (руб)
-  const [contributionAmount, setContributionAmount] = useState<number>(1000000); // руб (взнос результатом)
-  const [investorAmount, setInvestorAmount] = useState<number>(0); // руб (взнос деньгами)
-  const [monthlyContributions, setMonthlyContributions] = useState<number>(1000000); // руб (взносы других в месяц)
-  const [growthMultiplier, setGrowthMultiplier] = useState<number>(0); // % (множитель роста ежемесячных взносов)
-  const [membershipFee, setMembershipFee] = useState<number>(5); // % (членские взносы в месяц от складочного капитала)
-  const [withdrawalRate, setWithdrawalRate] = useState<number>(100); // % (сколько пайщик забирает из своей стоимости)
-  const [membershipFeeGrowthMultiplier, setMembershipFeeGrowthMultiplier] = useState<number>(0); // % (множитель роста членских взносов)
+interface CalculatorPageProps {
+  initialParams?: {
+    contributionAmount?: number;
+    investorAmount?: number;
+    withdrawalRate?: number;
+    initialCapital?: number;
+    membershipFee?: number;
+    monthlyContributions?: number;
+    growthMultiplier?: number;
+    membershipFeeGrowthMultiplier?: number;
+  };
+}
+
+export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
+  // Начальные параметры из таблицы Excel или переданные через props
+  const [initialCapital, setInitialCapital] = useState<number>(initialParams?.initialCapital ?? CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL); // Стартовая капитализация (руб)
+  const [contributionAmount, setContributionAmount] = useState<number>(initialParams?.contributionAmount ?? 1000000); // руб (взнос результатом)
+  const [investorAmount, setInvestorAmount] = useState<number>(initialParams?.investorAmount ?? 0); // руб (взнос деньгами)
+  const [monthlyContributions, setMonthlyContributions] = useState<number>(() => {
+    const contributionValue = initialParams?.contributionAmount ?? 1000000;
+    return initialParams?.monthlyContributions ?? (contributionValue < 1000000 ? 1000000 : contributionValue);
+  }); // руб (взносы других в месяц - синхронизируется с contributionAmount)
+  const [growthMultiplier, setGrowthMultiplier] = useState<number>(initialParams?.growthMultiplier ?? 0); // % (множитель роста ежемесячных взносов)
+  const [membershipFee, setMembershipFee] = useState<number>(initialParams?.membershipFee ?? 5); // % (членские взносы в месяц от складочного капитала)
+  const [withdrawalRate, setWithdrawalRate] = useState<number>(initialParams?.withdrawalRate ?? 100); // % (сколько пайщик забирает из своей стоимости)
+  const [membershipFeeGrowthMultiplier, setMembershipFeeGrowthMultiplier] = useState<number>(initialParams?.membershipFeeGrowthMultiplier ?? 0); // % (множитель роста членских взносов)
   
   // Результаты расчетов
   const [creatorBaseValue, setCreatorBaseValue] = useState<number>(0); // Стоимость создателя
@@ -53,6 +69,12 @@ export const CalculatorPage: FC = () => {
   const [investorsShare, setInvestorsShare] = useState<number>(0); // Доля инвесторов в процентах
   const [initialMonthlyInvestorAmount, setInitialMonthlyInvestorAmount] = useState<number>(0); // Вклад инвестора в нулевом месяце
   
+  // Данные о других создателях в первом месяце
+  const [firstMonthOthersCreatorBase, setFirstMonthOthersCreatorBase] = useState<number>(0);
+  const [firstMonthOthersAuthorBase, setFirstMonthOthersAuthorBase] = useState<number>(0);
+  const [firstMonthOthersCreatorBonus, setFirstMonthOthersCreatorBonus] = useState<number>(0);
+  const [firstMonthOthersAuthorBonus, setFirstMonthOthersAuthorBonus] = useState<number>(0);
+  
   // Настройка видимости столбцов для разработчика
   // Измените true/false для нужных колонок
   const columnVisibility: ColumnVisibility = {
@@ -69,7 +91,14 @@ export const CalculatorPage: FC = () => {
     currentMonthlyContributions: true,  // Взносы других создателей
     monthlyInvestorAmount: true,       // Ежемесячный вклад инвестора
     totalInvestorsAmount: true,        // Накопительный итог вкладов инвесторов
-    investorsShare: true               // Доля инвесторов в процентах
+    investorsShare: true,               // Доля инвесторов в процентах
+    
+    // Колонки для других создателей (показываем только если пользователь инвестор)
+    othersCreatorBase: true,           // Базовая стоимость других создателей
+    othersAuthorBase: true,            // Стоимость авторов других создателей
+    othersCreatorBonus: true,          // Премия других создателей
+    othersAuthorBonus: true,           // Премия авторов других создателей
+    othersWithdrawalAmount: true       // Возврат другим создателям
   };
   
   useEffect(() => {
@@ -105,6 +134,12 @@ export const CalculatorPage: FC = () => {
     setInvestorsShare(results.investorsShare);
     setInitialMonthlyInvestorAmount(results.initialMonthlyInvestorAmount);
     
+    // Обновление данных о других создателях в первом месяце
+    setFirstMonthOthersCreatorBase(results.firstMonthOthersCreatorBase);
+    setFirstMonthOthersAuthorBase(results.firstMonthOthersAuthorBase);
+    setFirstMonthOthersCreatorBonus(results.firstMonthOthersCreatorBonus);
+    setFirstMonthOthersAuthorBonus(results.firstMonthOthersAuthorBonus);
+    
   }, [contributionAmount, investorAmount, withdrawalRate, initialCapital, membershipFee, monthlyContributions, growthMultiplier, membershipFeeGrowthMultiplier]);
   
   return (
@@ -118,7 +153,11 @@ export const CalculatorPage: FC = () => {
         <Col xs={24} md={12} style={{ display: 'flex', flexDirection: 'column' }}>
           <ContributionFormSection 
             contributionAmount={contributionAmount}
-            onContributionAmountChange={(value) => setContributionAmount(value || 0)}
+            onContributionAmountChange={(value) => {
+              const amount = value || 0;
+              setContributionAmount(amount);
+              setMonthlyContributions(amount < 1000000 ? 1000000 : amount);
+            }}
           />
           
         </Col>
@@ -147,6 +186,7 @@ export const CalculatorPage: FC = () => {
             avgMonthlyYield={avgMonthlyYield}
             annualYield={annualYield}
             roi={roi}
+            creatorBonus={creatorBonus}
           />
         </Col>
       </Row>
@@ -168,6 +208,10 @@ export const CalculatorPage: FC = () => {
             totalInvestorsAmount={totalInvestorsAmount}
             investorsShare={investorsShare}
             initialMonthlyInvestorAmount={initialMonthlyInvestorAmount}
+            firstMonthOthersCreatorBase={firstMonthOthersCreatorBase}
+            firstMonthOthersAuthorBase={firstMonthOthersAuthorBase}
+            firstMonthOthersCreatorBonus={firstMonthOthersCreatorBonus}
+            firstMonthOthersAuthorBonus={firstMonthOthersAuthorBonus}
           />
         </Col>
       </Row>

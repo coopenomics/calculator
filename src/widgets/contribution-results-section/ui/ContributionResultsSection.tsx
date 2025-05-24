@@ -18,6 +18,10 @@ interface ContributionResultsSectionProps {
   totalInvestorsAmount: number;
   investorsShare: number;
   initialMonthlyInvestorAmount: number;
+  firstMonthOthersCreatorBase: number;
+  firstMonthOthersAuthorBase: number;
+  firstMonthOthersCreatorBonus: number;
+  firstMonthOthersAuthorBonus: number;
 }
 
 export const ContributionResultsSection: FC<ContributionResultsSectionProps> = ({
@@ -32,7 +36,11 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
   additionalCapitalization,
   totalInvestorsAmount,
   investorsShare,
-  initialMonthlyInvestorAmount
+  initialMonthlyInvestorAmount,
+  firstMonthOthersCreatorBase,
+  firstMonthOthersAuthorBase,
+  firstMonthOthersCreatorBonus,
+  firstMonthOthersAuthorBonus
 }) => {
   // Состояние для предотвращения ошибок SSR
   const [isClient, setIsClient] = useState(false);
@@ -45,31 +53,38 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
 
   // Метки для графика
   const pieLabels = [
-    'Ваш взнос «создателя»',
-    'Ваш взнос «инвестора»',
-    'Взнос «автора»',
-    'Ваша премия «создателя»',
-    'Премия «автора»',
-    'Премия «вкладчиков»',
-    'Вклад других «инвесторов»',
+    'Ваш взнос «Создателя»',
+    'Ваш взнос «Инвестора»',
+    'Взнос «Авторов»',
+    'Ваша премия «Создателя»',
+    'Премия «Авторов»',
+    'Премия «Вкладчиков»',
+    'Вклад других «Инвесторов»',
+    'Взнос других «Создателей»',
+    'Премия других «Создателей»'
   ];
 
   // Цвета для графика
-  const pieColors = ['#1890ff', '#52c41a', '#faad14', '#eb2f96', '#722ed1', '#f5222d', '#13c2c2'];
+  const pieColors = ['#1890ff', '#52c41a', '#faad14', '#eb2f96', '#722ed1', '#f5222d', '#13c2c2', '#2f54eb', '#fa8c16'];
 
   // Обновляем данные и опции графика при изменении props
   useEffect(() => {
+    // Объединяем данные авторов
+    const totalAuthorBaseValue = (Number(authorBaseValue) || 0) + (Number(firstMonthOthersAuthorBase) || 0);
+    const totalAuthorBonus = (Number(authorBonus) || 0) + (Number(firstMonthOthersAuthorBonus) || 0);
+    
     // Обновляем данные
     // Принудительно конвертируем в числа, чтобы избежать проблем с отображением
     const newChartData = [
       Number(creatorBaseValue) || 0,
       Number(investorAmount) || 0,
-      Number(authorBaseValue) || 0,
+      totalAuthorBaseValue,
       Number(creatorBonus) || 0,
-      Number(authorBonus) || 0,
+      totalAuthorBonus,
       Number(additionalCapitalization) || 0,
       Number(initialMonthlyInvestorAmount) || 0,
-
+      Number(firstMonthOthersCreatorBase) || 0,
+      Number(firstMonthOthersCreatorBonus) || 0,
     ];
     
     // Проверяем, что данные действительно изменились
@@ -119,61 +134,75 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
         }
       }]
     });
-  }, [creatorBaseValue, authorBaseValue, creatorBonus, authorBonus, additionalCapitalization, initialMonthlyInvestorAmount, investorAmount]);
+  }, [creatorBaseValue, authorBaseValue, creatorBonus, authorBonus, additionalCapitalization, initialMonthlyInvestorAmount, investorAmount, firstMonthOthersCreatorBase, firstMonthOthersAuthorBase, firstMonthOthersCreatorBonus, firstMonthOthersAuthorBonus]);
 
   return (
-    <BaseCard title="Вклады и премии в первый месяц">
+    <BaseCard title="Складочный капитал в первый месяц">
       <Row gutter={[16, 16]}>
         <Col xs={24} lg={12} className='mt-md'>
           <div className="result-item">
             <Text>
-              Ваш взнос «создателя»:
-              <SharedTooltip text="Стоимость вашего «результата» труда, который вы внесли в систему. Это то, за что вы можете получить возврат, в зависимости от процента возврата стоимости." />
+              Ваш вклад «Создателя»:
+              <SharedTooltip text="Стоимость вашего «Результата» труда, который вы внесли в систему. Это то, за что вы можете получить возврат, в зависимости от процента возврата стоимости." />
             </Text>
             <Text strong>{creatorBaseValue.toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Ваш взнос «инвестора»:
-              <SharedTooltip text="Сумма денежных средств, которые вы внесли как «инвестор». Этот взнос не создаёт премий, но увеличивает вашу долю в складочном капитале." />
+              Ваш вклад «Инвестора»:
+              <SharedTooltip text="Сумма денежных средств, которые вы внесли как «Инвестор». Этот взнос не создаёт премий, но увеличивает вашу долю в складочном капитале." />
             </Text>
             <Text strong>{investorAmount.toLocaleString('ru-RU')} ₽</Text>
           </div>
           
           <div className="result-item">
             <Text>
-              Ваша премия «создателя»:
-              <SharedTooltip text="Дополнительная сумма, которую система начисляет Вам как «создателю» «результата» (100% от стоимости вашего «результата» за вычетом выплаченной компенсации стоимости труда). Премия всегда капитализируется и увеличивает вашу долю в складочном капитале." />
+              Ваша премия «Создателя»:
+              <SharedTooltip text="Дополнительная сумма, которую система начисляет Вам как «Создателю» «Результата» (100% от стоимости вашего «Результата» за вычетом выплаченной компенсации стоимости труда). Премия всегда капитализируется и увеличивает вашу долю в складочном капитале." />
             </Text>
             <Text strong>{creatorBonus.toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Взнос «автора»:
-              <SharedTooltip text="Стоимость труда «автора», который внёс вклад в создание вашего «результата» (61.8% от стоимости вашего «результата»). «Авторы» также могут получить компенсацию стоимости труда при внесении «результата»." />
+              Вклад «Авторов»:
+              <SharedTooltip text="Общая стоимость труда всех «Авторов» в первом месяце (61.8% от стоимости всех «Результатов»). Включает как ваших «Авторов», так и «Авторов» других «Создателей»." />
             </Text>
-            <Text strong>{authorBaseValue.toLocaleString('ru-RU')} ₽</Text>
+            <Text strong>{((authorBaseValue || 0) + (firstMonthOthersAuthorBase || 0)).toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Премия «автора»:
-              <SharedTooltip text="Дополнительная сумма, начисляемая «авторам» (100% от стоимости их труда в «результате»). Как и все премии, она капитализируется в складочном капитале." />
+              Премия «Авторов»:
+              <SharedTooltip text="Общая сумма премий всех «Авторов» (100% от стоимости их труда). Включает премии как ваших «Авторов», так и «Авторов» других «Создателей». Премии капитализируются в складочном капитале." />
             </Text>
-            <Text strong>{authorBonus.toLocaleString('ru-RU')} ₽</Text>
+            <Text strong>{((authorBonus || 0) + (firstMonthOthersAuthorBonus || 0)).toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Премия «вкладчиков»:
-              <SharedTooltip text="Дополнительная капитализация для ранних «вкладчиков» («авторов», «создателей» и «инвесторов»), рассчитанная по коэффициенту золотого сечения (161.8% от суммы стоимости и премий «авторов» и «создателей» за вычетом их возвратов). Эта премия увеличивает общий складочный капитал и распределяется между всеми участниками согласно доле." />
+              Премия «Вкладчиков»:
+              <SharedTooltip text="Дополнительная капитализация для ранних «Вкладчиков» («Авторов», «Создателей» и «Инвесторов»), рассчитанная по коэффициенту золотого сечения (161.8% от суммы стоимости и премий «Авторов» и «Создателей» за вычетом их возвратов). Эта премия увеличивает общий складочный капитал и распределяется между всеми участниками согласно доле." />
             </Text>
             <Text strong>{additionalCapitalization.toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Вклад других «инвесторов»:
-              <SharedTooltip text="Суммарный вклад других «инвесторов» в первом месяце, т.е. не Ваш. Этот вклад влияет на общий складочный капитал и обеспечивает возврат стоимости вкладов «авторов» и «создателей»." />
+              Вклад других «Инвесторов»:
+              <SharedTooltip text="Суммарный вклад других «Инвесторов» в первом месяце, т.е. не Ваш. Этот вклад влияет на общий складочный капитал и обеспечивает возврат стоимости вкладов «Авторов» и «Создателей»." />
             </Text>
             <Text strong>{initialMonthlyInvestorAmount.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Взнос других «Создателей»:
+              <SharedTooltip text="Стоимость «Результатов» труда других «Создателей» в первом месяце (если вы действуете только как инвестор). Эти взносы учитываются в общей генерации и влияют на распределение капитала." />
+            </Text>
+            <Text strong>{firstMonthOthersCreatorBase.toLocaleString('ru-RU')} ₽</Text>
+          </div>
+          <div className="result-item">
+            <Text>
+              Премия других «Создателей»:
+              <SharedTooltip text="Дополнительная сумма, начисляемая другим «Создателям» (100% от стоимости их «Результатов»). Эта премия капитализируется в складочном капитале." />
+            </Text>
+            <Text strong>{firstMonthOthersCreatorBonus.toLocaleString('ru-RU')} ₽</Text>
           </div>
         </Col>
         <Col xs={24} lg={12}>
