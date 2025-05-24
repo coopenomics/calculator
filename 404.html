@@ -4,18 +4,11 @@
   <meta charset="utf-8">
   <title>Перенаправление</title>
   <script type="text/javascript">
-    // Перенаправление на index.html при обращении к несуществующим страницам
-    // Необходимо для SPA с клиентской маршрутизацией на GitHub Pages
-    var pathSegmentsToKeep = 1; // Оставляем /calculator/ в пути
-    
+    // Перенаправление на index.html с сохранением вложенного пути после /calculator/
     var l = window.location;
-    var redirectUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '');
-    var segments = l.pathname.split('/');
-    segments = segments.slice(0, pathSegmentsToKeep + 1);
-    
-    redirectUrl += segments.join('/') + '/';
-    redirectUrl += l.search;
-    
+    var base = '/calculator';
+    var path = l.pathname.startsWith(base) ? l.pathname.slice(base.length) : l.pathname;
+    var redirectUrl = l.protocol + '//' + l.host + base + '/index.html' + path + l.search + l.hash;
     window.location.replace(redirectUrl);
   </script>
 </head>
