@@ -61,7 +61,7 @@ export const LegendSection: FC = () => {
         <Col xs={24} lg={6} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
             <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Благорост»</Text>
-            <Text>Увеличение стоимости «Доли» в «Результате» от последующих вкладов временем «Создателей».</Text>
+            <Text>Увеличение «Доли» в «Результате» от «Премий».</Text>
           </div>
         </Col>
       </Row>
