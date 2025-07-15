@@ -1,31 +1,35 @@
-import { Button, Row, Col, Typography } from 'antd';
+import { Button } from 'antd';
 import { useState, useEffect, FC } from 'react';
-import { calculateBenefits, CALCULATOR_CONSTANTS, ColumnVisibility } from '../../entities/core';
+import { calculateBenefits, CALCULATOR_CONSTANTS, ColumnVisibility, CalculationParams } from '../../entities/core';
 import { 
   ContributionFormSection, 
   InvestmentFormSection, 
   ContributionResultsSection, 
   ProfitabilityResultsSection, 
   MonthlyResultsTable, 
-  SystemParamsSection,
-  WithdrawalRateSection,
-  MonthlyContributionsSection
 } from '../../widgets';
 import { CalculatorPage } from './CalculatorPage';
 import './styles/calculator.css';
 
-export const WizardCalculatorPage: FC = () => {
+interface WizardCalculatorPageProps {
+  initialParams?: Partial<CalculationParams>;
+}
+
+export const WizardCalculatorPage: FC<WizardCalculatorPageProps> = ({ initialParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
   
   // Параметры калькулятора
-  const [initialCapital] = useState<number>(CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL);
-  const [contributionAmount, setContributionAmount] = useState<number>(0);
-  const [investorAmount, setInvestorAmount] = useState<number>(0);
-  const [monthlyContributions, setMonthlyContributions] = useState<number>(1000000);
-  const [growthMultiplier] = useState<number>(0);
-  const [membershipFee] = useState<number>(5);
-  const [withdrawalRate] = useState<number>(100);
-  const [membershipFeeGrowthMultiplier] = useState<number>(0);
+  const [initialCapital] = useState<number>(initialParams?.initialCapital ?? CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL);
+  const [contributionAmount, setContributionAmount] = useState<number>(initialParams?.contributionAmount ?? 0);
+  const [investorAmount, setInvestorAmount] = useState<number>(initialParams?.investorAmount ?? 0);
+  const [monthlyContributions, setMonthlyContributions] = useState<number>(() => {
+    const contributionValue = initialParams?.contributionAmount ?? 0;
+    return initialParams?.monthlyContributions ?? (contributionValue < 1000000 ? 1000000 : contributionValue);
+  });
+  const [growthMultiplier] = useState<number>(initialParams?.growthMultiplier ?? 0);
+  const [membershipFee] = useState<number>(initialParams?.membershipFee ?? 5);
+  const [withdrawalRate] = useState<number>(initialParams?.withdrawalRate ?? 100);
+  const [membershipFeeGrowthMultiplier] = useState<number>(initialParams?.membershipFeeGrowthMultiplier ?? 0);
   
   // Результаты расчетов
   const [creatorBaseValue, setCreatorBaseValue] = useState<number>(0);
