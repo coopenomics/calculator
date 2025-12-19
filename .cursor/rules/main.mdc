@@ -21,14 +21,14 @@ alwaysApply: true
 
 ### Логика работы:
 1. **Стартовая капитализация**: начальный капитал системы (25 млн руб по умолчанию)
-2. **Премия вкладчиков при первом взносе**: `first_contributors_bonus = (total_generated - initial_withdrawals) * 1.618`
+2. **Премия ранних участников при первом взносе**: `first_contributors_bonus = (total_generated - initial_withdrawals) * 1.618`
 3. **Начальный складочный капитал**: `shareholder_capital = initial_capital + total_generated - initial_withdrawals + first_contributors_bonus + investor_amount`
 4. **Взнос участника**: `initial_investment = (creator_base - creator_initial_withdrawal + creator_bonus) + investor_amount`
 5. **Доля участника**: `participant_share = initial_investment / shareholder_capital * 100%`
 
 ### Ежемесячный прирост капитала:
 1. **Генерация от новых взносов**: `monthly_generation = others_creator_base + others_author_base + others_creator_bonus + others_author_bonus`
-2. **Премия взносчиков**: `investors_bonus = (monthly_generation - others_withdrawal_amount) * 1.618`
+2. **Премия ранних участников**: `investors_bonus = (monthly_generation - others_withdrawal_amount) * 1.618`
 3. **Прирост складочного капитала**: `capital_growth = monthly_generation + investors_bonus`
 4. **Обновление складочного капитала**: `shareholder_capital += capital_growth`
 5. **Увеличение взноса участника**: `participant_bonus_share = investors_bonus * (participant_share / 100)`
@@ -71,7 +71,7 @@ alwaysApply: true
 - Взнос деньгами не создает никаких премий
 - Взнос деньгами не имеет себестоимости и не подлежит начальному возврату
 - Взнос деньгами полностью учитывается в складочном капитале и в доле участника
-- Взнос деньгами получает те же выгоды от премий других взносчиков, что и взнос результатом
+- Взнос деньгами получает те же выгоды от премий других ранних участников, что и взнос результатом
 - Участник может вносить одновременно и результат труда и денежные средства
 
 ## Особенности и ограничения:

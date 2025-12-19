@@ -82,8 +82,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#faad14" 
                 text={
                   <span>
-                    «Премия» «Взносчиков»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
-                    <SharedTooltip text="«Премия» «Взносчиков» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
+                    «Премия» «Ранние участники»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
+                    <SharedTooltip text="«Премия» «Ранние участники» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
                   </span>
                 }
               />
