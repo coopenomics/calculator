@@ -11,7 +11,7 @@ export const ContributionFormSection: FC<ContributionFormSectionProps> = ({
   onContributionAmountChange,
 }) => {
   return (
-    <BaseCard title="Ваш взнос трудом">
+    <BaseCard title="Ваш взнос временем">
       <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
         {/* <LabelText> */}
           {/* Укажите стоимость труда */}
