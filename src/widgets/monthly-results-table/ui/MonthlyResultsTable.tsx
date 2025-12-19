@@ -25,13 +25,13 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
   // Колонки для таблицы результатов
   const allColumns = [
     {
-      title: columnTitle('Месяц', 'Номер месяца от начала участия. Месяц 1 - момент вступления, месяц 2 - первый месяц после внесения вашего вклада'),
+      title: columnTitle('Месяц', 'Номер месяца от начала участия. Месяц 1 - момент вступления, месяц 2 - первый месяц после внесения вашего взноса'),
       dataIndex: 'month',
       key: 'month',
       render: (value: number) => value + 1
     },
     {
-      title: columnTitle('Складочный капитал', 'Общая сумма всех вкладов и «Премий» в системе на конец месяца, с учетом выплат членских взносов, которые уменьшают складочный капитал'),
+      title: columnTitle('Складочный капитал', 'Общая сумма всех взносов и «Премий» в системе на конец месяца, с учетом выплат членских взносов, которые уменьшают складочный капитал'),
       dataIndex: 'shareholderCapital',
       key: 'shareholderCapital',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
@@ -44,25 +44,25 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
     },
     
     {
-      title: columnTitle('Сумма генерации', 'Общая сумма стоимости взносов «Результатов» труда «Создателей» и «Авторов», а также их «Премий» (без учёта «Премий» «Вкладчиков» и взносов «Инвесторов») за месяц'),
+      title: columnTitle('Сумма генерации', 'Общая сумма стоимости взносов «Результатов» труда «Исполнителей» и «Авторов», а также их «Премий» (без учёта «Премий» «Взносчиков» и взносов «Инвесторов») за месяц'),
       dataIndex: 'monthlyGeneration',
       key: 'monthlyGeneration',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('«Премия» «Вкладчиков»', 'Дополнительная капитализация от новых взносов «Результатами» труда «Создателей» и «Авторов» (161.8% от суммы стоимости труда и их «Премий» за вычетом возвратов)'),
+      title: columnTitle('«Премия» «Взносчиков»', 'Дополнительная капитализация от новых взносов «Результатами» труда «Исполнителей» и «Авторов» (161.8% от суммы стоимости труда и их «Премий» за вычетом возвратов)'),
       dataIndex: 'contributorsBonus',
       key: 'contributorsBonus',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Вклад других «Инвесторов»', 'Денежный взнос других «Инвесторов» в текущем месяце'),
+      title: columnTitle('Взнос других «Инвесторов»', 'Денежный взнос других «Инвесторов» в текущем месяце'),
       dataIndex: 'monthlyInvestorAmount',
       key: 'monthlyInvestorAmount',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Сумма вкладов «Инвесторов»', 'Накопительная сумма всех взносов всех «Инвесторов» с начала учета (включая Вас)'),
+      title: columnTitle('Сумма взносов «Инвесторов»', 'Накопительная сумма всех взносов всех «Инвесторов» с начала учета (включая Вас)'),
       dataIndex: 'totalInvestorsAmount',
       key: 'totalInvestorsAmount',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
@@ -74,20 +74,20 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       render: (value: number) => value + ' %'
     },
     {
-      title: columnTitle('Вклады других «Создателей» и «Инвесторов»', 'Общая сумма взносов других «Создателей» и «Инвесторов» в текущем месяце'),
+      title: columnTitle('Взносы других «Исполнителей» и «Инвесторов»', 'Общая сумма взносов других «Исполнителей» и «Инвесторов» в текущем месяце'),
       dataIndex: 'currentMonthlyContributions',
       key: 'currentMonthlyContributions',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     ,
     {
-      title: columnTitle('Вклад других «Создателей»', 'Базовая стоимость «Результатов» труда других «Создателей» в текущем месяце'),
+      title: columnTitle('Взнос других «Исполнителей»', 'Базовая стоимость «Результатов» труда других «Исполнителей» в текущем месяце'),
       dataIndex: 'othersCreatorBase',
       key: 'othersCreatorBase',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Вклад «Авторов» других', 'Стоимость труда «Авторов», связанных с «Результатами» других «Создателей» (61.8% от их базовой стоимости)'),
+      title: columnTitle('Взнос «Авторов» других', 'Стоимость труда «Авторов», связанных с «Результатами» других «Исполнителей» (61.8% от их базовой стоимости)'),
       dataIndex: 'othersAuthorBase',
       key: 'othersAuthorBase',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
@@ -111,7 +111,7 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Предполагаемая стоимость вашего вклада', 'Общая сумма вашего вклада на конец месяца, включая первоначальный взнос и накопленную долю в «Премия»х вкладчиков'),
+      title: columnTitle('Предполагаемая стоимость вашего взноса', 'Общая сумма вашего взноса на конец месяца, включая первоначальный взнос и накопленную долю в «Премия»х взносчиков'),
       dataIndex: 'initialContribution',
       key: 'initialContribution',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'

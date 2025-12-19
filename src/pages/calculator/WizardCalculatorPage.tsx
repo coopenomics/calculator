@@ -73,7 +73,7 @@ export const WizardCalculatorPage: FC<WizardCalculatorPageProps> = ({ initialPar
     totalInvestorsAmount: true,
     investorsShare: true,
     
-    // Колонки для других создателей
+    // Колонки для других исполнителей
     othersCreatorBase: true,
     othersAuthorBase: true,
     othersCreatorBonus: true,

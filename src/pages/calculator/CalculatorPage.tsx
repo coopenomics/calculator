@@ -65,9 +65,9 @@ export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
   const [roi, setRoi] = useState<number>(0); // Return on Investment
   
   // Данные об инвесторах
-  const [totalInvestorsAmount, setTotalInvestorsAmount] = useState<number>(0); // Общая сумма вкладов инвесторов
+  const [totalInvestorsAmount, setTotalInvestorsAmount] = useState<number>(0); // Общая сумма взносов инвесторов
   const [investorsShare, setInvestorsShare] = useState<number>(0); // Доля инвесторов в процентах
-  const [initialMonthlyInvestorAmount, setInitialMonthlyInvestorAmount] = useState<number>(0); // Вклад инвестора в нулевом месяце
+  const [initialMonthlyInvestorAmount, setInitialMonthlyInvestorAmount] = useState<number>(0); // Взнос инвестора в нулевом месяце
   
   // Данные о других создателях в первом месяце
   const [firstMonthOthersCreatorBase, setFirstMonthOthersCreatorBase] = useState<number>(0);
@@ -88,17 +88,17 @@ export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
     monthlyFee: true,          // Членские взносы
     accumulatedFees: true,    // Накопленные взносы (скрыт по умолчанию)
     creatorMembershipFeePayment: true,  // Выплата создателю
-    currentMonthlyContributions: true,  // Взносы других создателей
-    monthlyInvestorAmount: true,       // Ежемесячный вклад инвестора
-    totalInvestorsAmount: true,        // Накопительный итог вкладов инвесторов
+    currentMonthlyContributions: true,  // Взносы других исполнителей
+    monthlyInvestorAmount: true,       // Ежемесячный взнос инвестора
+    totalInvestorsAmount: true,        // Накопительный итог взносов инвесторов
     investorsShare: true,               // Доля инвесторов в процентах
     
-    // Колонки для других создателей (показываем только если пользователь инвестор)
-    othersCreatorBase: true,           // Базовая стоимость других создателей
-    othersAuthorBase: true,            // Стоимость авторов других создателей
-    othersCreatorBonus: true,          // Премия других создателей
-    othersAuthorBonus: true,           // Премия авторов других создателей
-    othersWithdrawalAmount: true       // Возврат другим создателям
+    // Колонки для других исполнителей (показываем только если пользователь инвестор)
+    othersCreatorBase: true,           // Базовая стоимость других исполнителей
+    othersAuthorBase: true,            // Стоимость авторов других исполнителей
+    othersCreatorBonus: true,          // Премия других исполнителей
+    othersAuthorBonus: true,           // Премия авторов других исполнителей
+    othersWithdrawalAmount: true       // Возврат другим исполнителям
   };
   
   useEffect(() => {

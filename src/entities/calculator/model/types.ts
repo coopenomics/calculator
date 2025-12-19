@@ -7,7 +7,7 @@ export interface CalculationParams {
   withdrawalRate: number; // Процент возврата стоимости (%)
   initialCapital?: number; // Стартовая капитализация (руб)
   membershipFee?: number; // Эффективность капитала (%)
-  monthlyContributions?: number; // Взносы других создателей (руб/мес)
+  monthlyContributions?: number; // Взносы других исполнителей (руб/мес)
   growthMultiplier?: number; // Множитель роста взносов (%)
 }
 

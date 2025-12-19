@@ -11,9 +11,9 @@ alwaysApply: true
 ## Ключевые параметры и формулы
 
 ### Базовые расчеты:
-1. **Себестоимость создателя**: `creator_base = fact_time * personal_hour_cost` или взнос результатом напрямую
-2. **Себестоимость автора**: `author_base = 0.618 * creator_base` (61.8% от себестоимости создателя)
-3. **Премия создателя**: `creator_bonus = 1.0 * creator_base` (100% от себестоимости)
+1. **Себестоимость исполнителя**: `creator_base = fact_time * personal_hour_cost` или взнос результатом напрямую
+2. **Себестоимость автора**: `author_base = 0.618 * creator_base` (61.8% от себестоимости исполнителя)
+3. **Премия исполнителя**: `creator_bonus = 1.0 * creator_base` (100% от себестоимости)
 4. **Премия автора**: `author_bonus = 1.0 * author_base` (100% от себестоимости автора)
 5. **Общая базовая стоимость**: `total_base = creator_base + author_base`
 6. **Общая генерация**: `total_generated = total_base + creator_bonus + author_bonus`
@@ -23,15 +23,15 @@ alwaysApply: true
 1. **Стартовая капитализация**: начальный капитал системы (25 млн руб по умолчанию)
 2. **Премия вкладчиков при первом взносе**: `first_contributors_bonus = (total_generated - initial_withdrawals) * 1.618`
 3. **Начальный складочный капитал**: `shareholder_capital = initial_capital + total_generated - initial_withdrawals + first_contributors_bonus + investor_amount`
-4. **Вклад участника**: `initial_investment = (creator_base - creator_initial_withdrawal + creator_bonus) + investor_amount`
+4. **Взнос участника**: `initial_investment = (creator_base - creator_initial_withdrawal + creator_bonus) + investor_amount`
 5. **Доля участника**: `participant_share = initial_investment / shareholder_capital * 100%`
 
 ### Ежемесячный прирост капитала:
 1. **Генерация от новых взносов**: `monthly_generation = others_creator_base + others_author_base + others_creator_bonus + others_author_bonus`
-2. **Премия вкладчиков**: `investors_bonus = (monthly_generation - others_withdrawal_amount) * 1.618`
+2. **Премия взносчиков**: `investors_bonus = (monthly_generation - others_withdrawal_amount) * 1.618`
 3. **Прирост складочного капитала**: `capital_growth = monthly_generation + investors_bonus`
 4. **Обновление складочного капитала**: `shareholder_capital += capital_growth`
-5. **Увеличение вклада участника**: `participant_bonus_share = investors_bonus * (participant_share / 100)`
+5. **Увеличение взноса участника**: `participant_bonus_share = investors_bonus * (participant_share / 100)`
 6. **Пересчет доли участника**: `participant_share = (initial_investment / shareholder_capital) * 100`
 
 ### Расчет выплат:
@@ -47,7 +47,7 @@ alwaysApply: true
 ### Начальный возврат участнику:
 - В нулевой месяц участник получает возврат части своей себестоимости (только для взноса результатом):
   * `creator_initial_withdrawal = creator_base * withdrawal_rate%`
-- Остальная часть себестоимости вместе с премией и взносом инвестора составляет общий вклад в складочный капитал
+- Остальная часть себестоимости вместе с премией и взносом инвестора составляет общий взнос в складочный капитал
 
 ### Расчет доходности:
 1. **Доходность от выплат членских взносов**:
@@ -58,10 +58,10 @@ alwaysApply: true
 3. **Общая доходность**:
    * `avg_monthly_yield = average_monthly_membership_fee_yield + capital_growth_monthly`
 
-## Взносы других создателей:
+## Взносы других исполнителей:
 - Базовая себестоимость новых взносов: `others_creator_base = monthly_contributions`
 - Себестоимость авторов новых взносов: `others_author_base = others_creator_base * 0.618`
-- Премия создателей от новых взносов: `others_creator_bonus = others_creator_base`
+- Премия исполнителей от новых взносов: `others_creator_bonus = others_creator_base`
 - Премия авторов от новых взносов: `others_author_bonus = others_author_base`
 - Общая базовая себестоимость от новых взносов: `others_monthly_base = others_creator_base + others_author_base`
 - Общая генерация от новых взносов: `others_monthly_generated = others_monthly_base + others_creator_bonus + others_author_bonus`
@@ -71,7 +71,7 @@ alwaysApply: true
 - Взнос деньгами не создает никаких премий
 - Взнос деньгами не имеет себестоимости и не подлежит начальному возврату
 - Взнос деньгами полностью учитывается в складочном капитале и в доле участника
-- Взнос деньгами получает те же выгоды от премий других пайщиков, что и взнос результатом
+- Взнос деньгами получает те же выгоды от премий других взносчиков, что и взнос результатом
 - Участник может вносить одновременно и результат труда и денежные средства
 
 ## Особенности и ограничения:
@@ -81,5 +81,5 @@ alwaysApply: true
 - Стоимость доли участника = `shareholder_capital * participant_share / 100`
 - Членские взносы накапливаются и выплачиваются пакетами в заранее определенные месяцы
 - После каждой выплаты членских взносов доля участника уменьшается
-- При каждом новом взносе других создателей доля участника также уменьшается, но абсолютная стоимость доли при этом растет за счет капитализации
+- При каждом новом взносе других исполнителей доля участника также уменьшается, но абсолютная стоимость доли при этом растет за счет капитализации
 - Взнос результатом может быть нулевым (если участник делает только денежный взнос)

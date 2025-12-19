@@ -7,7 +7,7 @@ export interface CalculationParams {
   withdrawalRate: number; // Процент возврата стоимости (%)
   initialCapital?: number; // Стартовая капитализация (руб)
   membershipFee?: number; // Эффективность капитала (%)
-  monthlyContributions?: number; // Взносы других создателей (руб/мес)
+  monthlyContributions?: number; // Взносы других исполнителей (руб/мес)
   growthMultiplier?: number; // Множитель роста взносов (%)
   membershipFeeGrowthMultiplier?: number; // Множитель роста членских взносов (%)
 }
@@ -28,17 +28,17 @@ export interface MonthlyResult {
   isPayoutMonth: boolean;
   accumulatedFees: number;
   totalMembershipFeePayments?: number;
-  currentMonthlyContributions: number; // Взносы других создателей (без инвесторов)
-  monthlyInvestorAmount?: number; // Ежемесячный вклад инвестора
-  totalInvestorsAmount?: number; // Накопительный итог вкладов инвесторов
+  currentMonthlyContributions: number; // Взносы других исполнителей (без инвесторов)
+  monthlyInvestorAmount?: number; // Ежемесячный взнос инвестора
+  totalInvestorsAmount?: number; // Накопительный итог взносов инвесторов
   investorsShare?: number; // Доля инвесторов в процентах
   
-  // Данные о других создателях по месяцам
-  othersCreatorBase?: number; // Базовая стоимость других создателей
-  othersAuthorBase?: number; // Стоимость авторов других создателей
-  othersCreatorBonus?: number; // Премия других создателей
-  othersAuthorBonus?: number; // Премия авторов других создателей
-  othersWithdrawalAmount?: number; // Возврат другим создателям
+  // Данные о других исполнителях по месяцам
+  othersCreatorBase?: number; // Базовая стоимость других исполнителей
+  othersAuthorBase?: number; // Стоимость авторов других исполнителей
+  othersCreatorBonus?: number; // Премия других исполнителей
+  othersAuthorBonus?: number; // Премия авторов других исполнителей
+  othersWithdrawalAmount?: number; // Возврат другим исполнителям
 }
 
 /**
@@ -53,7 +53,7 @@ export interface CalculationResults {
   totalBaseValue: number;
   totalGenerated: number;
   
-  // Данные о других создателях в первом месяце
+  // Данные о других исполнителях в первом месяце
   firstMonthOthersCreatorBase: number;
   firstMonthOthersAuthorBase: number;
   firstMonthOthersCreatorBonus: number;
@@ -78,9 +78,9 @@ export interface CalculationResults {
   totalReturn: number;
   
   // Показатели инвесторов
-  totalInvestorsAmount: number; // Общая сумма вкладов инвесторов
+  totalInvestorsAmount: number; // Общая сумма взносов инвесторов
   investorsShare: number; // Доля инвесторов в процентах
-  initialMonthlyInvestorAmount: number; // Сумма вклада инвестора в нулевом месяце
+  initialMonthlyInvestorAmount: number; // Сумма взноса инвестора в нулевом месяце
 }
 
 /**
@@ -98,14 +98,14 @@ export interface ColumnVisibility {
   accumulatedFees: boolean;
   creatorMembershipFeePayment: boolean;
   currentMonthlyContributions: boolean;
-  monthlyInvestorAmount?: boolean; // Ежемесячный вклад инвестора
-  totalInvestorsAmount?: boolean; // Накопительный итог вкладов инвесторов
+  monthlyInvestorAmount?: boolean; // Ежемесячный взнос инвестора
+  totalInvestorsAmount?: boolean; // Накопительный итог взносов инвесторов
   investorsShare?: boolean; // Доля инвесторов в процентах
   
-  // Колонки для других создателей
-  othersCreatorBase?: boolean; // Базовая стоимость других создателей
-  othersAuthorBase?: boolean; // Стоимость авторов других создателей
-  othersCreatorBonus?: boolean; // Премия других создателей
-  othersAuthorBonus?: boolean; // Премия авторов других создателей
-  othersWithdrawalAmount?: boolean; // Возврат другим создателям
+  // Колонки для других исполнителей
+  othersCreatorBase?: boolean; // Базовая стоимость других исполнителей
+  othersAuthorBase?: boolean; // Стоимость авторов других исполнителей
+  othersCreatorBonus?: boolean; // Премия других исполнителей
+  othersAuthorBonus?: boolean; // Премия авторов других исполнителей
+  othersWithdrawalAmount?: boolean; // Возврат другим исполнителям
 } 

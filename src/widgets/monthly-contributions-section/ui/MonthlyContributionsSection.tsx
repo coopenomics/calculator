@@ -11,11 +11,11 @@ export const MonthlyContributionsSection: FC<MonthlyContributionsSectionProps> =
   onMonthlyContributionsChange,
 }) => {
   return (
-    <BaseCard title="Ежемесячные взносы результатами других создателей">
+    <BaseCard title="Ежемесячные взносы результатами других исполнителей">
       <div className="input-container" style={{ flex: '1 1 auto', display: 'flex', flexDirection: 'column' }}>
         <LabelText>
           Сумма взносов в месяц
-          <SharedTooltip text="Общая сумма взносов результатами других создателей, вносимая ими в систему ежемесячно после вашего внесения результата. Эти взносы создают «Премии», которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас." />
+          <SharedTooltip text="Общая сумма взносов результатами других исполнителей, вносимая ими в систему ежемесячно после вашего внесения результата. Эти взносы создают «Премии», которые увеличивают складочный капитал и приносят выгоду всем участникам, включая Вас." />
         </LabelText>
         <DebouncedInputSlider
           value={monthlyContributions}
@@ -29,7 +29,7 @@ export const MonthlyContributionsSection: FC<MonthlyContributionsSectionProps> =
           tooltipFormatter={(value: number | undefined) => `${value?.toLocaleString('ru-RU')} ₽/мес`}
         />
         <DescriptionText>
-          Ежемесячная сумма взносов результатами других создателей
+          Ежемесячная сумма взносов результатами других исполнителей
         </DescriptionText>
       </div>
     </BaseCard>

@@ -142,14 +142,14 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
         <Col xs={24} lg={12} className='mt-md'>
           <div className="result-item">
             <Text>
-              Ваш вклад «Создателя»:
+              Ваш взнос «Исполнителя»:
               <SharedTooltip text="Стоимость вашего «Результата» труда, который вы внесли в систему. Это то, за что вы можете получить возврат, в зависимости от процента возврата стоимости." />
             </Text>
             <Text strong>{creatorBaseValue.toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Ваш вклад «Инвестора»:
+              Ваш взнос «Инвестора»:
               <SharedTooltip text="Сумма денежных средств, которые вы внесли как «Инвестор». Этот взнос не создаёт премий, но увеличивает вашу долю в складочном капитале." />
             </Text>
             <Text strong>{investorAmount.toLocaleString('ru-RU')} ₽</Text>
@@ -164,7 +164,7 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
           </div>
           <div className="result-item">
             <Text>
-              Вклад «Авторов»:
+              Взнос «Авторов»:
               <SharedTooltip text="Общая стоимость труда всех «Авторов» в первом месяце (61.8% от стоимости всех «Результатов»). Включает как ваших «Авторов», так и «Авторов» других «Создателей»." />
             </Text>
             <Text strong>{((authorBaseValue || 0) + (firstMonthOthersAuthorBase || 0)).toLocaleString('ru-RU')} ₽</Text>
@@ -178,15 +178,15 @@ export const ContributionResultsSection: FC<ContributionResultsSectionProps> = (
           </div>
           <div className="result-item">
             <Text>
-              «Премия» «Вкладчиков»:
-              <SharedTooltip text="Дополнительная капитализация для ранних «Вкладчиков» («Авторов», «Создателей» и «Инвесторов»), рассчитанная по коэффициенту золотого сечения (161.8% от суммы стоимости и премий «Авторов» и «Создателей» за вычетом их возвратов). Эта «Премия» увеличивает общий складочный капитал и распределяется между всеми участниками согласно доле." />
+              «Премия» «Взносчиков»:
+              <SharedTooltip text="Дополнительная капитализация для ранних «Взносчиков» («Авторов», «Исполнителей» и «Инвесторов»), рассчитанная по коэффициенту золотого сечения (161.8% от суммы стоимости и премий «Авторов» и «Исполнителей» за вычетом их возвратов). Эта «Премия» увеличивает общий складочный капитал и распределяется между всеми участниками согласно доле." />
             </Text>
             <Text strong>{additionalCapitalization.toLocaleString('ru-RU')} ₽</Text>
           </div>
           <div className="result-item">
             <Text>
-              Вклад других «Инвесторов»:
-              <SharedTooltip text="Суммарный вклад других «Инвесторов» в первом месяце, т.е. не Ваш. Этот вклад влияет на общий складочный капитал и обеспечивает возврат стоимости вкладов «Авторов» и «Создателей»." />
+              Взнос других «Инвесторов»:
+              <SharedTooltip text="Суммарный взнос других «Инвесторов» в первом месяце, т.е. не Ваш. Этот взнос влияет на общий складочный капитал и обеспечивает возврат стоимости взносов «Авторов» и «Исполнителей»." />
             </Text>
             <Text strong>{initialMonthlyInvestorAmount.toLocaleString('ru-RU')} ₽</Text>
           </div>

@@ -12,7 +12,7 @@ export function calculateBenefits({
   withdrawalRate, // Процент возврата стоимости (%)
   initialCapital = CALCULATOR_CONSTANTS.DEFAULT_INITIAL_CAPITAL, // Стартовая капитализация (руб)
   membershipFee = 5, // Эффективность капитала (%)
-  monthlyContributions = 1000000, // Взносы других создателей (руб/мес)
+  monthlyContributions = 1000000, // Взносы других исполнителей (руб/мес)
   growthMultiplier = 0, // Множитель роста взносов (%)
   membershipFeeGrowthMultiplier = 0 // Множитель роста членских взносов (%)
 }: CalculationParams): CalculationResults {
@@ -27,7 +27,7 @@ export function calculateBenefits({
   const creatorBonusFact = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * creatorBaseFact; // Премия создателя (100%)
   const authorBonusFact = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * authorBaseFact; // Премия автора (100%)
   
-  // Если пользователь только инвестор, учитываем взносы других создателей в первом месяце
+  // Если пользователь только инвестор, учитываем взносы других исполнителей в первом месяце
   const firstMonthOthersCreatorBase = isUserInvestorOnly ? monthlyContributions : 0;
   const firstMonthOthersAuthorBase = isUserInvestorOnly ? CALCULATOR_CONSTANTS.AUTHOR_RATIO * firstMonthOthersCreatorBase : 0;
   const firstMonthOthersCreatorBonus = isUserInvestorOnly ? CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * firstMonthOthersCreatorBase : 0;
@@ -36,7 +36,7 @@ export function calculateBenefits({
   // Суммарная базовая стоимость (доступна к возврату только для пользователя)
   const totalBase = creatorBaseFact + authorBaseFact;
   
-  // Суммарная генерация от первого взноса (включая других создателей если пользователь только инвестор)
+  // Суммарная генерация от первого взноса (включая других исполнителей если пользователь только инвестор)
   const totalGenerated = creatorBaseFact + authorBaseFact + creatorBonusFact + authorBonusFact +
                          firstMonthOthersCreatorBase + firstMonthOthersAuthorBase + firstMonthOthersCreatorBonus + firstMonthOthersAuthorBonus;
 
@@ -44,7 +44,7 @@ export function calculateBenefits({
   const creatorWithdrawalAmount = creatorBaseFact * (withdrawalRate / 100); // Сумма возврата создателя
   const authorWithdrawalAmount = authorBaseFact * (withdrawalRate / 100); // Сумма возврата автора
   
-  // Расчет возврата для других создателей в первом месяце (если пользователь только инвестор)
+  // Расчет возврата для других исполнителей в первом месяце (если пользователь только инвестор)
   const firstMonthOthersWithdrawal = (firstMonthOthersCreatorBase + firstMonthOthersAuthorBase) * (withdrawalRate / 100);
   
   const creatorInitialWithdrawal = creatorWithdrawalAmount; // Начальный возврат создателя
@@ -75,8 +75,8 @@ export function calculateBenefits({
   let initialCreatorValue = initialContribution; // Начальная стоимость доли создателя
   let finalCreatorValue = 0; // Конечная стоимость доли создателя (заполнится в конце расчетов)
   
-  // Переменные для учета накопительного итога вкладов инвесторов
-  let totalInvestorsAmount = initialMonthlyInvestorAmount + investorAmount; // Общая сумма вкладов инвесторов
+  // Переменные для учета накопительного итога взносов инвесторов
+  let totalInvestorsAmount = initialMonthlyInvestorAmount + investorAmount; // Общая сумма взносов инвесторов
   let investorsShare = totalInvestorsAmount / shareholderCapital * 100; // Доля инвесторов в процентах
   
   // Месяцы, в которые производятся выплаты членских взносов
@@ -96,14 +96,14 @@ export function calculateBenefits({
     creatorMembershipFeePayment: Math.round(creatorInitialWithdrawal), // Возврат создателю в нулевой месяц
     accumulatedFees: 0,
     isPayoutMonth: false, // Флаг для различения от обычных выплат членских взносов
-    // Если пользователь только инвестор, показываем взносы других создателей + инвестора
+    // Если пользователь только инвестор, показываем взносы других исполнителей + инвестора
     // Иначе показываем только инвестора (как раньше)
     currentMonthlyContributions: Math.round(isUserInvestorOnly ? 
       (firstMonthOthersCreatorBase + firstMonthOthersAuthorBase + initialMonthlyInvestorAmount) :
       initialMonthlyInvestorAmount
     ),
     monthlyInvestorAmount: Math.round(initialMonthlyInvestorAmount), // Добавляем информацию о ежемесячном инвесторе
-    totalInvestorsAmount: Math.round(totalInvestorsAmount), // Накопительный итог вкладов инвесторов
+    totalInvestorsAmount: Math.round(totalInvestorsAmount), // Накопительный итог взносов инвесторов
     investorsShare: parseFloat(investorsShare.toFixed(2)), // Доля инвесторов
     
     // Данные о других создателях в нулевом месяце
@@ -114,7 +114,7 @@ export function calculateBenefits({
     othersWithdrawalAmount: Math.round(firstMonthOthersWithdrawal)
   });
   
-  // Текущее значение взносов других создателей (без учета инвесторов)
+  // Текущее значение взносов других исполнителей (без учета инвесторов)
   // Если пользователь только инвестор, то взносы других уже учтены в нулевом месяце,
   // поэтому в первом месяце применяем рост к базовому значению
   let currentMonthlyContributions = monthlyContributions;
@@ -145,10 +145,10 @@ export function calculateBenefits({
     // Учитываем дополнительного инвестора начиная со второго месяца (month >= 2)
     let monthlyInvestorAmount = 0;
     
-    // Инвестор вносит сумму, равную стоимости труда авторов и создателей
+    // Инвестор вносит сумму, равную стоимости труда авторов и исполнителей
     monthlyInvestorAmount = othersCreatorBase + othersAuthorBase
     
-    // Увеличиваем накопительную сумму вкладов инвесторов
+    // Увеличиваем накопительную сумму взносов инвесторов
     totalInvestorsAmount += monthlyInvestorAmount;
   
     
@@ -221,7 +221,7 @@ export function calculateBenefits({
       finalCreatorValue = shareholderCapital * creatorShare / 100;
     }
     
-    // Увеличиваем взносы других создателей для следующего месяца на указанный процент
+    // Увеличиваем взносы других исполнителей для следующего месяца на указанный процент
     currentMonthlyContributions *= (1 + growthMultiplier / 100);
     
     // Сохранение результатов текущего месяца
@@ -238,7 +238,7 @@ export function calculateBenefits({
       isPayoutMonth,
       accumulatedFees: Math.round(accumulatedMembershipFees),
       totalMembershipFeePayments: Math.round(totalMembershipFeePayments),
-      // Отдельно учитываем вклады создателей, авторов и инвесторов
+      // Отдельно учитываем вклады исполнителей, авторов и инвесторов
       currentMonthlyContributions: Math.round(currentMonthlyContributions + monthlyInvestorAmount),
       monthlyInvestorAmount: Math.round(monthlyInvestorAmount),
       totalInvestorsAmount: Math.round(totalInvestorsAmount),
