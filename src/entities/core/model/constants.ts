@@ -2,7 +2,7 @@
  * Константы системы
  */
 export const CALCULATOR_CONSTANTS = {
-  GOLDEN_RATIO: 1.382,
+  GOLDEN_RATIO: 0.618,
   AUTHOR_RATIO: 0.618,
   CREATOR_BONUS_RATIO: 1.0, 
   AUTHOR_BONUS_RATIO: 1.0,
