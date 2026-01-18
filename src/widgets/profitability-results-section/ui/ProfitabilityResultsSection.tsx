@@ -37,7 +37,7 @@ export const ProfitabilityResultsSection: FC<ProfitabilityResultsSectionProps> =
         </Col>
         <Col flex="1 1 50%">
           <Statistic
-            title="«Премия» «Создателя»"
+            title="«Прибавка» «Исполнителя»"
             value={creatorBonus}
             precision={0}
             prefix="+"

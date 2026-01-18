@@ -24,8 +24,8 @@ export function calculateBenefits({
   const authorBaseFact = CALCULATOR_CONSTANTS.AUTHOR_RATIO * creatorBaseFact; // Стоимость автора (61.8%)
   
   // Премии пользователя
-  const creatorBonusFact = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * creatorBaseFact; // Премия создателя (100%)
-  const authorBonusFact = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * authorBaseFact; // Премия автора (100%)
+  const creatorBonusFact = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * creatorBaseFact; // Прибавка создателя (100%)
+  const authorBonusFact = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * authorBaseFact; // Прибавка автора (100%)
   
   // Если пользователь только инвестор, учитываем взносы других исполнителей в первом месяце
   const firstMonthOthersCreatorBase = isUserInvestorOnly ? monthlyContributions : 0;
@@ -126,8 +126,8 @@ export function calculateBenefits({
     // Считаем генерацию от нового взноса (руб)
     const othersCreatorBase = currentMonthlyContributions; // Базовая стоимость создателя с учетом роста
     const othersAuthorBase = othersCreatorBase * CALCULATOR_CONSTANTS.AUTHOR_RATIO; // Стоимость автора (61.8%)
-    const othersCreatorBonus = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * othersCreatorBase; // Премия создателя (100%)
-    const othersAuthorBonus = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * othersAuthorBase; // Премия автора (100%)
+    const othersCreatorBonus = CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * othersCreatorBase; // Прибавка создателя (100%)
+    const othersAuthorBonus = CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * othersAuthorBase; // Прибавка автора (100%)
     
     // Генерация нового взноса (руб)
     const monthlyGeneration = othersCreatorBase + othersAuthorBase + othersCreatorBonus + othersAuthorBonus;
@@ -155,7 +155,7 @@ export function calculateBenefits({
     // Общий прирост капитала (включая инвестора)
     const totalCapitalGrowth = capitalGrowth + monthlyInvestorAmount;
     
-    // Увеличиваем складочный капитал: новый взнос + «Премия» вкладчиков + инвестор - возврат (руб)
+    // Увеличиваем складочный капитал: новый взнос + «Прибавка» вкладчиков + инвестор - возврат (руб)
     shareholderCapital += totalCapitalGrowth;
     
     // Пересчитываем долю инвесторов после изменения складочного капитала

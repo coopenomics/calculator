@@ -50,9 +50,9 @@ export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
   
   // Результаты расчетов
   const [creatorBaseValue, setCreatorBaseValue] = useState<number>(0); // Стоимость создателя
-  const [creatorBonus, setCreatorBonus] = useState<number>(0); // Премия создателя
+  const [creatorBonus, setCreatorBonus] = useState<number>(0); // Прибавка создателя
   const [authorBaseValue, setAuthorBaseValue] = useState<number>(0); // Стоимость автора
-  const [authorBonus, setAuthorBonus] = useState<number>(0); // Премия автора
+  const [authorBonus, setAuthorBonus] = useState<number>(0); // Прибавка автора
   const [totalGenerated, setTotalGenerated] = useState<number>(0); // Общая сумма генерации
   const [totalBaseValue, setTotalBaseValue] = useState<number>(0); // Общая базовая стоимость
   const [availableRefund, setAvailableRefund] = useState<number>(0); // Доступно к возврату
@@ -81,7 +81,7 @@ export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
     month: true,               // Месяц
     shareholderCapital: true,  // Складочный капитал
     monthlyGeneration: true,   // Сумма генерации
-    contributorsBonus: true,      // Премия вкладчиков
+    contributorsBonus: true,      // Прибавка вкладчиков
     capitalGrowth: true,       // Прирост складочного капитала
     initialContribution: true,   // Вклад создателя
     creatorShare: true,        // Доля создателя
@@ -96,8 +96,8 @@ export const CalculatorPage: FC<CalculatorPageProps> = ({ initialParams }) => {
     // Колонки для других исполнителей (показываем только если пользователь инвестор)
     othersCreatorBase: true,           // Базовая стоимость других исполнителей
     othersAuthorBase: true,            // Стоимость авторов других исполнителей
-    othersCreatorBonus: true,          // Премия других исполнителей
-    othersAuthorBonus: true,           // Премия авторов других исполнителей
+    othersCreatorBonus: true,          // Прибавка других исполнителей
+    othersAuthorBonus: true,           // Прибавка авторов других исполнителей
     othersWithdrawalAmount: true       // Возврат другим исполнителям
   };
   

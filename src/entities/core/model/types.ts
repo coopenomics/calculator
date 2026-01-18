@@ -36,8 +36,8 @@ export interface MonthlyResult {
   // Данные о других исполнителях по месяцам
   othersCreatorBase?: number; // Базовая стоимость других исполнителей
   othersAuthorBase?: number; // Стоимость авторов других исполнителей
-  othersCreatorBonus?: number; // Премия других исполнителей
-  othersAuthorBonus?: number; // Премия авторов других исполнителей
+  othersCreatorBonus?: number; // Прибавка других исполнителей
+  othersAuthorBonus?: number; // Прибавка авторов других исполнителей
   othersWithdrawalAmount?: number; // Возврат другим исполнителям
 }
 
@@ -105,7 +105,7 @@ export interface ColumnVisibility {
   // Колонки для других исполнителей
   othersCreatorBase?: boolean; // Базовая стоимость других исполнителей
   othersAuthorBase?: boolean; // Стоимость авторов других исполнителей
-  othersCreatorBonus?: boolean; // Премия других исполнителей
-  othersAuthorBonus?: boolean; // Премия авторов других исполнителей
+  othersCreatorBonus?: boolean; // Прибавка других исполнителей
+  othersAuthorBonus?: boolean; // Прибавка авторов других исполнителей
   othersWithdrawalAmount?: boolean; // Возврат другим исполнителям
 } 

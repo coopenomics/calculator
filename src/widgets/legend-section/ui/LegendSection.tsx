@@ -15,7 +15,7 @@ export const LegendSection: FC = () => {
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} lg={6}>
           <div className="legend-role">
-            <Text className="legend-role-title"><UserOutlined style={{ fontSize: 24, marginRight: 8 }} />«Создатель»</Text>
+            <Text className="legend-role-title"><UserOutlined style={{ fontSize: 24, marginRight: 8 }} />«Исполнитель»</Text>
             <Text>Участник, который создаёт результат, внося своё время.</Text>
           </div>
         </Col>
@@ -33,7 +33,7 @@ export const LegendSection: FC = () => {
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <div className="legend-role">
-            <Text className="legend-role-title"><TeamOutlined style={{ fontSize: 24, marginRight: 8 }} />«Взносчик»</Text>
+            <Text className="legend-role-title"><TeamOutlined style={{ fontSize: 24, marginRight: 8 }} />Участник</Text>
             <Text>Любой участник системы, получающий выгоду от капитализации взносов в результат.</Text>
           </div>
         </Col>
@@ -54,7 +54,7 @@ export const LegendSection: FC = () => {
         </Col>
         <Col xs={24} lg={6} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="legend-role">
-            <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Премия»</Text>
+            <Text className="legend-role-title"><FileTextOutlined style={{ fontSize: 24, marginRight: 8 }} />«Прибавка»</Text>
             <Text>Дополнительный взнос, который образуется при внесении «Результата» в кооператив.</Text>
           </div>
         </Col>

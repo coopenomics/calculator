@@ -46,8 +46,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#13c2c2" 
                 text={
                   <span>
-                    Стоимость труда «Создателя»: <b>{(100).toFixed(1)}%</b>
-                    <SharedTooltip text="Доля «Создателя» — это часть, которую получает «Создатель» «Результата» труда (100% от его стоимости)." />
+                    Стоимость труда «Исполнителя»: <b>{(100).toFixed(1)}%</b>
+                    <SharedTooltip text="Доля «Исполнителя» — это часть, которую получает «Исполнитель» «Результата» труда (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -55,8 +55,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#52c41a" 
                 text={
                   <span>
-                    Стоимость труда «Автора» от «Создателя»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_RATIO * 100).toFixed(1)}%</b>
-                    <SharedTooltip text="Доля «Автора» — это часть, которую получает «Автор» «Результата» (61.8% от стоимости «Создателя»)." />
+                    Стоимость труда «Автора» от «Исполнителя»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_RATIO * 100).toFixed(1)}%</b>
+                    <SharedTooltip text="Доля «Автора» — это часть, которую получает «Автор» «Результата» (61.8% от стоимости «Исполнителя»)." />
                   </span>
                 }
               />
@@ -64,8 +64,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#1890ff" 
                 text={
                   <span>
-                    «Премия» «Создателя»: <b>{(CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * 100).toFixed(0)}%</b>
-                    <SharedTooltip text="«Премия» «Создателя» — дополнительная сумма, начисляемая «Создателю» (100% от его стоимости)." />
+                    «Прибавка» «Исполнителя»: <b>{(CALCULATOR_CONSTANTS.CREATOR_BONUS_RATIO * 100).toFixed(0)}%</b>
+                    <SharedTooltip text="«Прибавка» «Исполнителя» — дополнительная сумма, начисляемая «Создателю» (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -73,8 +73,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#722ed1" 
                 text={
                   <span>
-                    «Премия» «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * 100).toFixed(0)}%</b>
-                    <SharedTooltip text="«Премия» «Автора» — дополнительная сумма, начисляемая «Автору» (100% от его стоимости)." />
+                    «Прибавка» «Автора»: <b>{(CALCULATOR_CONSTANTS.AUTHOR_BONUS_RATIO * 100).toFixed(0)}%</b>
+                    <SharedTooltip text="«Прибавка» «Автора» — дополнительная сумма, начисляемая «Автору» (100% от его стоимости)." />
                   </span>
                 }
               />
@@ -82,8 +82,8 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 color="#faad14" 
                 text={
                   <span>
-                    «Премия» «Ранние участники»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
-                    <SharedTooltip text="«Премия» «Ранние участники» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
+                    «Прибавка» «Ранние участники»: <b>{CALCULATOR_CONSTANTS.GOLDEN_RATIO * 100}%</b>
+                    <SharedTooltip text="«Прибавка» «Ранние участники» — коэффициент (1.618), по которому рассчитывается дополнительная выгода для ранних участников." />
                   </span>
                 }
               />
@@ -110,14 +110,14 @@ export const SystemParamsSection: FC<SystemParamsSectionProps> = ({
                 text={
                   <span>
                     Обеспечение инвестициями: <b>100%</b>
-                    <SharedTooltip text="Модель предполагает, что каждый месяц в систему инвестируются средства, обеспечивающие возвраты стоимости труда «Создателям» и «Авторам» в полном объеме." />
+                    <SharedTooltip text="Модель предполагает, что каждый месяц в систему инвестируются средства, обеспечивающие возвраты стоимости труда «Исполнителям» и «Авторам» в полном объеме." />
                   </span>
                 }
               />
             </Space>
             <div className="disclaimer" style={{ marginTop: '16px', fontSize: '12px', background: 'rgba(223, 136, 64, 0.68)', padding: '12px', borderRadius: '8px' }}>
               <span style={{ fontStyle: 'italic' }}>
-                При снижении уровня взносов от инвесторов возвраты стоимости труда «Создателям» и «Авторам» могут быть отложены до поступления достаточного объёма новых инвестиций.
+                При снижении уровня взносов от инвесторов возвраты стоимости труда «Исполнителям» и «Авторам» могут быть отложены до поступления достаточного объёма новых инвестиций.
               </span>
             </div>
           </div>

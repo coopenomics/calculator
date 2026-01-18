@@ -50,7 +50,7 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('«Премия» «Ранние участники»', 'Дополнительная капитализация от новых взносов «Результатами» труда «Исполнителей» и «Авторов» (161.8% от суммы стоимости труда и их «Премий» за вычетом возвратов)'),
+      title: columnTitle('«Прибавка» «Ранние участники»', 'Дополнительная капитализация от новых взносов «Результатами» труда «Исполнителей» и «Авторов» (161.8% от суммы стоимости труда и их «Премий» за вычетом возвратов)'),
       dataIndex: 'contributorsBonus',
       key: 'contributorsBonus',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
@@ -93,25 +93,25 @@ export const MonthlyResultsTable: FC<MonthlyResultsTableProps> = ({
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('«Премия» других «Создателей»', 'Дополнительная сумма, начисляемая другим «Создателям» (100% от стоимости их «Результатов»)'),
+      title: columnTitle('«Прибавка» других «Создателей»', 'Дополнительная сумма, начисляемая другим «Исполнителям» (100% от стоимости их «Результатов»)'),
       dataIndex: 'othersCreatorBonus',
       key: 'othersCreatorBonus',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('«Премия» «Авторов» других', 'Дополнительная сумма, начисляемая «Авторам» других «Создателей» (100% от стоимости их труда)'),
+      title: columnTitle('«Прибавка» «Авторов» других', 'Дополнительная сумма, начисляемая «Авторам» других «Создателей» (100% от стоимости их труда)'),
       dataIndex: 'othersAuthorBonus',
       key: 'othersAuthorBonus',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Возврат другим', 'Сумма возврата стоимости «Результатов» другим «Создателям» и их «Авторам» в текущем месяце'),
+      title: columnTitle('Возврат другим', 'Сумма возврата стоимости «Результатов» другим «Исполнителям» и их «Авторам» в текущем месяце'),
       dataIndex: 'othersWithdrawalAmount',
       key: 'othersWithdrawalAmount',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
     },
     {
-      title: columnTitle('Предполагаемая стоимость вашего взноса', 'Общая сумма вашего взноса на конец месяца, включая первоначальный взнос и накопленную долю в «Премия»х «Ранние участники»'),
+      title: columnTitle('Предполагаемая стоимость вашего взноса', 'Общая сумма вашего взноса на конец месяца, включая первоначальный взнос и накопленную долю в «Прибавка»х «Ранние участники»'),
       dataIndex: 'initialContribution',
       key: 'initialContribution',
       render: (value: number) => value.toLocaleString('ru-RU') + ' RUB'
